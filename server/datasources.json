@@ -23,8 +23,8 @@
     "secretAccessKey": "DFJAbvjSOb15Syla6moU/IZ3uPlZA6EwEHwEGizl",
     "region": "eu-west-1",
     "platformApplicationArn": {
-      "iOs": "arn:aws:sns:eu-west-1:582765234147:app/APNS/PICSTREETPRODUCTION",
-      "Android": "arn:aws:sns:eu-west-1:582765234147:app/GCM/PICSTREETGGCM"
+      "iOs": "arn:aws:sns:eu-west-1:422591035751:app/APNS_SANDBOX/PICSTREET-PUSH-DEVELOPMENT",
+      "Android": "arn:aws:sns:eu-west-1:422591035751:app/APNS/PICSTREET-PUSH-PRODUCTION"
     }
   }
 }
