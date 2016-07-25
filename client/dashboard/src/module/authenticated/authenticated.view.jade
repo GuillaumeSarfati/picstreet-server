@@ -1,0 +1,69 @@
+
+ion-side-menus#authenticated
+
+	ion-side-menu-content(drag-content="false")
+		
+		//- ion-nav-bar.bar-dark.ui-color(
+		//- 	sync-opacity
+		//- 	no-tap-scroll="false"
+		//- 	align-title="center"
+		//- 	ng-class="{translateleft: searchIsOpen, translateright: !searchIsOpen}"
+		//- )
+
+		//- 	ion-nav-back-button.color-primary(ng-click="$root.stateGoBack()") {{'back' | translate }}
+
+		//- 	ion-nav-buttons(side="left")
+		//- 		button.button.button-icon.button-clear.ion-navicon(menu-toggle="left")
+
+		//- 	ion-nav-buttons(side="right")
+		//- 		.search-button.button.button-icon.button-clear.icon.bb-icon.bb-icon-faste.icon-pink(
+		//- 			ng-click="$root.me.status == 'activate' ? $root.search() : $root.discoverMode()"
+		//- 		)
+		
+		ion-nav-view(name="menuContent" animation="no-animation")
+
+	ion-side-menu(side="left")
+
+		ion-item(
+			menu-close
+			ui-sref="authenticated.map"
+		)
+			.icon: i.custom-icon.custom-icon-business
+			.title Map
+		
+		ion-item(
+			ui-sref="authenticated.photographers"
+			menu-close
+		)
+			.icon: i.custom-icon.custom-icon-business
+			.title Photographers
+
+		ion-item(
+			ui-sref="authenticated.customers"
+			menu-close
+		)
+			.icon: i.custom-icon.custom-icon-business
+			.title Customers
+
+		ion-item(
+			ui-sref="authenticated.albums"
+			menu-close
+		)
+			.icon: i.custom-icon.custom-icon-business
+			.title Albums
+
+		//- ion-item(
+		//- 	menu-close
+		//- 	ng-click="openModalMyPictures()"
+		//- )
+		//- 	.icon: i.custom-icon.custom-icon-business
+		//- 	.title My Pictures
+
+		ion-item(
+			menu-close
+			ng-click="logout()"
+		)
+			.icon: i.custom-icon.custom-icon-business
+			.title Logout
+
+		

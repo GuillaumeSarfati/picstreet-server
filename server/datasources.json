@@ -1,0 +1,30 @@
+{
+  "mongoDb": {
+    "host": "ds011311.mlab.com",
+    "port": 11311,
+    "database": "pixer",
+    "username": "pixer",
+    "password": "azerty",
+    "name": "mongoDb",
+    "connector": "mongodb"
+  },
+  "storage": {
+    "name": "storage",
+    "connector": "loopback-component-storage",
+    "provider": "amazon",
+    "maxFileSize": "524288000",
+    "keyId": "AKIAJMGIQAU6BH36JH7A",
+    "key": "DFJAbvjSOb15Syla6moU/IZ3uPlZA6EwEHwEGizl"
+  },
+  "sns": {
+    "name": "sns",
+    "connector": "loopback-connector-sns",
+    "accessKeyId": "AKIAJMGIQAU6BH36JH7A",
+    "secretAccessKey": "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",
+    "region": "eu-west-1",
+    "platformApplicationArn": {
+      "iOs": "arn:aws:sns:eu-west-1:582765234147:app/APNS/PICSTREETPRODUCTION",
+      "Android": "arn:aws:sns:eu-west-1:582765234147:app/GCM/PICSTREETGGCM"
+    }
+  }
+}

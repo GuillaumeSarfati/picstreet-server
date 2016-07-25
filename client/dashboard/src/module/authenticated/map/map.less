@@ -1,0 +1,124 @@
+#map {
+	width: ~"calc(100vw - 350px)";
+	height:100vh !important;
+}
+.picstreet-menu {
+	position:fixed;
+	top: 25px;
+	left: 25px;
+	border: 3px solid white;
+	padding: 5px 10px;
+	font-size: 2em;
+	cursor:pointer;
+}
+
+.create-menu {
+	
+	display:flex;
+	justify-content:center;
+
+	.create-menu-link {
+		transition: all .3s ease;
+		border: 1px solid rgba(0,0,0,0);
+		padding: 10px 10px;
+		margin: 10px 10px;
+
+		&:hover, &.selected {
+			cursor:pointer;
+			color:@blue;
+			border: 1px solid @blue;
+		}
+	}
+}
+.create-map-content {
+	position:fixed;
+	
+	background: #272b35;
+	color:white;
+
+	right:0;
+	bottom:0;
+	z-index:99999;
+
+	width: 350px;
+	height: 100vh;
+	
+}
+
+.create-monument , .create-photographer {
+	.make-xs-column(12);
+	height: 100%;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	max-height: ~"calc(100vh - 53px)";
+	.final {
+		.make-xs-column(12, 0);
+		flex: 100;
+
+		display: flex;
+		justify-content:center;
+		flex-direction: column;
+		.final-center {
+			display:flex;
+			justify-content:center;
+			form {
+				div {
+					margin: 0 !important;
+				}
+			}
+			.dz-preview {
+				display:none;
+			}
+			.dz-message {
+				height: 94px;
+				display:flex;
+				justify-content: center;
+				flex-direction:column;
+				background: rgba(255,255,255,0.1) !important;
+				border-radius: 5px 5px 0px 0px !important;
+
+			}
+
+		}
+		#marker-monument{
+			margin: 0px;
+		}
+	}
+	.form {
+		display:flex;
+		flex-direction: column;
+		input, textarea {
+			padding-left: 10px !important;
+			margin-bottom: 10px !important;
+			background: rgba(255,255,255,0.3);
+			color:white !important;
+			// border-radius: 3px;
+
+			.make-xs-column(12);
+		}
+
+		.coord {
+			border: 2px solid white;
+			// border-radius: 3px;
+			margin-bottom: 10px;
+			.lat input {
+				border-bottom: 2px solid white;
+			}
+			input {
+				margin-bottom: 0px !important;
+				border-radius: 0;
+			}
+		}
+		.action {
+			button {
+				.make-xs-column(12);
+				.text-uppercase;
+				padding: 10px;
+				background: @blue;
+				border: none;
+			}
+			margin-bottom: 10px;
+		}
+	}
+}

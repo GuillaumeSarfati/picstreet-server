@@ -1,0 +1,80 @@
+ion-view(title="PIXER")
+	#map
+	.picstreet-menu(menu-toggle="left")
+		i.ion-navicon
+	
+	.create-map-content
+		
+		.create-menu
+			.create-menu-link(
+				ng-class="{'selected': content == 'monument'}"
+				ng-click="content = 'monument'"
+			) Monument
+			.create-menu-link(
+				ng-class="{'selected': content == 'photographer'}"
+				ng-click="content = 'photographer'"
+			) Photographer
+
+		.create-monument(ng-if="content == 'monument'")
+			.final
+				.final-center
+					#marker-monument(ng-click="onClick($event)")
+						#item-reserve-free-shooting
+							img(
+								ng-if="monument.picture"
+								ng-src="{{api}}/api/Buckets/picstreet-location/download/{{monument.picture}}")
+							form.dropzone#dropzone(
+								ng-if="!monument.picture"
+								method="post"
+								enctype="multipart/form-data"
+								ng-dropzone
+								dropzone="dropzone"
+								dropzone-config="dropzoneConfig"
+								event-handlers="dropzoneEvents"
+							)
+								
+								.dz-message(ng-show="!loadPicture") add picture
+								.dz-message(ng-show="loadPicture") loading...
+							
+							.name {{monument.name}}
+						#item-current-location-bar
+							img(src="img/svg/location-bar.svg")
+										
+
+
+			.form
+				
+
+
+				.coord
+					.lat
+						input(
+							type="text"
+							ng-model="monument.lat"
+							placeholder="Latitude"
+						)
+					.lng
+						input(
+							type="text"
+							ng-model="monument.lng"
+							placeholder="Longitude"
+						)
+
+				.name
+					input(
+						type="text"
+						ng-model="monument.name"
+						placeholder="Name"
+					)
+				.description
+					textarea(
+						ng-model="monument.description"
+						placeholder="Description"
+					)
+				.action
+					button(ng-click="createMonument(monument)") Create Location
+					button(ng-click="updateMonument(monument)") Update Location
+					button(ng-click="deleteMonument(monument)") Delete Location
+			
+		.create-photographer(ng-if="content == 'photographer'")
+			h1 Photographer

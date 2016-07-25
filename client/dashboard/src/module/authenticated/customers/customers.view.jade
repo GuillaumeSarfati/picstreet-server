@@ -1,0 +1,15 @@
+ion-view(title="Customers")#customers
+	.bar.bar-header
+		h1.title Customers
+		button.button.button-clear(
+			ng-click="modal.hide()"
+		) {{'close' | translate}}
+
+		
+	ion-content.customers-content
+
+		ion-item.customer(
+			ng-repeat="customer in customers"
+			ui-sref="authenticated.customer({id: customer.id})"
+		) {{ customer.email }}
+

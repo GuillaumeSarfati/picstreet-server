@@ -1,0 +1,13 @@
+ion-view(title="Albums")
+		
+	ion-content
+
+		#albums
+
+			.album(
+				ng-repeat="album in albums"
+				ui-sref="authenticated.album({id: album.id})"
+				style="background-image: url('http://localhost:3000/api/Buckets/ppxpicturesresized/download/resized-{{album.pictures[0].name}}')"
+			) 
+				.name {{ album.name }}
+				.price {{ album.purchase }}

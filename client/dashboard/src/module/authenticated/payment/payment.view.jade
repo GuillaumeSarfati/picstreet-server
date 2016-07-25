@@ -1,0 +1,15 @@
+ion-modal-view(title="{{ 'creditCard' | translate }}")
+	ion-view(title="{{ 'creditCard' | translate }}")#payment
+		.bar.bar-header
+			h1.title {{ 'creditCard' | translate }}
+			button.button.button-clear(
+				ng-click="modal.hide()"
+			) {{'close' | translate}}
+
+			
+		ion-content
+
+		ion-footer-bar.bar-dark(ng-click="scanCard()")
+			
+			.title {{ 'scanCreditCard' | translate }}
+

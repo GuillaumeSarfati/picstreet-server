@@ -1,0 +1,10 @@
+{
+  "loopback-component-explorer": {
+     "mountPath": "/explorer",
+     "apiInfo": {
+		    "title": "PicStreet API",
+		    "description": "Explorer"
+
+  	}
+  }
+}

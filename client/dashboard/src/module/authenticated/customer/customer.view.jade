@@ -1,0 +1,26 @@
+ion-view(title="Customers")#customer
+	.bar.bar-header
+		h1.title Customers
+		
+	ion-content.customer-content
+
+		section.customer 
+			ion-item.name {{ customer.email }}
+
+		section.albums
+			ion-item.album(
+				ng-repeat="album in customer.albums"
+				ui-sref="authenticated.album({id: album.id})"
+			) {{ album.name }}
+			
+
+			ion-item.album
+				label.item.item-input
+					span.input-label Name
+					input(type="text" ng-model="name")
+				
+				label.item.item-input
+					span.input-label Description
+					input(type="text" ng-model="description")
+				
+				button.button.button-block.button-calm(ng-click="createAlbum(name, description, customer)") Create New Album

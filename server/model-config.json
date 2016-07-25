@@ -1,0 +1,99 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback-component-passport/lib/models",
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ]
+  },
+  "User": {
+    "dataSource": "mongoDb",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "mongoDb",
+    "public": false
+  },
+  "UserCredential": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "UserIdentity": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "ACL": {
+    "dataSource": "mongoDb",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "Role": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "CreditCard": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "Customer": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "Device": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "Rating": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "Notification": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "Photographer": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "Location": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "Album": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "Bucket": {
+    "dataSource": "storage",
+    "public": true
+  },
+  "Picture": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "PromotionCode": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "Purchase": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "UsedPromotionCode": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "Position": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "LinkBetweenAlbumAndCustomer": {
+    "dataSource": "mongoDb",
+    "public": true
+  }
+}

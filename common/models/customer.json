@@ -1,0 +1,152 @@
+{
+  "name": "Customer",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "registrationDate": {
+      "type": "date",
+      "default": "$now"
+    },
+    "connectionDate": {
+      "type": "date",
+      "default": "$now"
+    },
+    "stripeId": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "creditCards": {
+      "type": "hasMany",
+      "model": "CreditCard",
+      "foreignKey": ""
+    },
+    "defaultCreditCard": {
+      "type": "belongsTo",
+      "model": "CreditCard",
+      "foreignKey": "defaultCreditCardId"
+    },
+    "devices": {
+      "type": "hasMany",
+      "model": "Device",
+      "foreignKey": ""
+    },
+    "actions": {
+      "type": "hasMany",
+      "model": "Action",
+      "foreignKey": "customerId"
+    },
+    "purchases": {
+      "type": "hasMany",
+      "model": "Purchase",
+      "foreignKey": "customerId"
+    },
+    "usedPromotionCodes": {
+      "type": "hasMany",
+      "model": "UsedPromotionCode",
+      "foreignKey": "customerId"
+    },
+    "albums": {
+      "type": "hasMany",
+      "model": "Album",
+      "foreignKey": "customerId",
+      "through": "LinkBetweenAlbumAndCustomer"
+    },
+    "positions": {
+      "type": "hasMany",
+      "model": "Position",
+      "foreignKey": "customerId"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "login"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "findOne"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "upsert"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "updatePassword"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "facebook"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "connectionDate"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "registrationDate"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "whoami"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "remember"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "update"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "administrator",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

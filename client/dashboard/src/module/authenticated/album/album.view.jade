@@ -1,0 +1,35 @@
+ion-view(title="{{album.name}}")
+		
+	ion-content#album
+
+		
+		.infos
+			input(ng-model="album.name")
+				
+		.album
+			form.dropzone#dropzone(
+				ng-if="dropzone"
+				method="post"
+				enctype="multipart/form-data"
+				ng-dropzone
+				dropzone="dropzone"
+				dropzone-config="dropzoneConfig"
+				event-handlers="dropzoneEvents"
+			)
+			
+			.picture(
+				ng-repeat="picture in album.pictures track by $index"
+
+			)
+				img(
+					ng-src="http://localhost:3000/api/Buckets/ppxpicturesresized/download/resized-{{picture.name}}"
+				)
+				.price(
+					ng-class="{'purchase': picture.purchase }"
+				) {{ picture.price }}€
+
+
+		.actions
+			button(
+				ng-click="updateAlbum(album)"
+			) Update Album

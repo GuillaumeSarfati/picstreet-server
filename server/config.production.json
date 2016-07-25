@@ -1,0 +1,9 @@
+{
+  "restApiRoot": "/api",
+  "host": "0.0.0.0",
+  "port": 3000,
+  "stripe": {
+    "secretKey": "sk_live_DCqUw9h7KJKlPZG9PUHnpun0",
+    "publishKey": "pk_live_ac59GWRNkJ8xly10NPoft8GW"
+  }
+}

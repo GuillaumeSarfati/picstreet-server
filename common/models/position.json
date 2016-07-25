@@ -1,0 +1,25 @@
+{
+  "name": "Position",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "date": {
+      "type": "date",
+      "default": "$now"
+    },
+    "coord": {
+      "type": "geopoint",
+      "required": true
+    },
+    "available": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

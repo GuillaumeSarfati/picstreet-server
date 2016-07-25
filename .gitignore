@@ -1,0 +1,37 @@
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+.DS_Store
+
+bower_components
+node_modules
+platforms
+design
+certificates
+www
+
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+npm-debug.log
+
+
+
+# CUSTOM
+
+client/landing/www
+
+client/customer/www
+client/customer/platforms/android
+client/customer/platforms/ios
+
+client/photographer/www
+client/photographer/platforms/android
+client/photographer/platforms/ios
+
+node_modules
+bower_components
+
+

@@ -1,0 +1,29 @@
+{
+  "name": "PromotionCode",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "code": {
+      "type": "string",
+      "required": true
+    },
+    "validity": {
+      "type": "date"
+    },
+    "amount": {
+      "type": "number",
+      "required": true
+    },
+    "available": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

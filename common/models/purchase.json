@@ -1,0 +1,39 @@
+{
+  "name": "Purchase",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "status": {
+      "type": "string",
+      "default": "error"
+    },
+    "pictures": {
+      "type": [
+        "object"
+      ],
+      "required": true
+    },
+    "price": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "promotionCode": {
+      "type": "hasOne",
+      "model": "PromotionCode",
+      "foreignKey": "promotionCodeId"
+    },
+    "creditCard": {
+      "type": "hasOne",
+      "model": "CreditCard",
+      "foreignKey": "creditCardId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

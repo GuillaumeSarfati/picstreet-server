@@ -1,0 +1,6 @@
+client/customer
+client/landing
+client/photographer
+
+node_modules
+npm-debug.log

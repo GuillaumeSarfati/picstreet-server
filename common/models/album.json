@@ -1,0 +1,34 @@
+{
+  "name": "Album",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "default": "$now"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "pictures": {
+      "type": "hasMany",
+      "model": "Picture",
+      "foreignKey": "albumId"
+    },
+    "customers": {
+      "type": "hasMany",
+      "model": "Customer",
+      "foreignKey": "albumId",
+      "through": "LinkBetweenAlbumAndCustomer"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

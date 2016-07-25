@@ -1,0 +1,24 @@
+{
+  "name": "UsedPromotionCode",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "useDate": {
+      "type": "date",
+      "default": "$now"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "promotionCode": {
+      "type": "belongsTo",
+      "model": "PromotionCode",
+      "foreignKey": "promotionCodeId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
