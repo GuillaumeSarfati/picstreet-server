@@ -11617,87 +11617,6 @@ ion-header-bar .title {
 .modal .button-clear.button-clear {
   color: rgba(0, 0, 0, 0.777);
 }
-#marker-photographer {
-  margin-left: -27px;
-  margin-top: -90px;
-  height: 100px;
-  width: 55px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-@-webkit-keyframes sonarWave {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    -webkit-transform: scale(5);
-            transform: scale(5);
-    opacity: 0;
-  }
-}
-@keyframes sonarWave {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    -webkit-transform: scale(5);
-            transform: scale(5);
-    opacity: 0;
-  }
-}
-#marker-photographer #item-current-location {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-transition: all .3s ease;
-          transition: all .3s ease;
-}
-#marker-photographer #item-current-location .sonar-location {
-  margin-bottom: -3px;
-  text-align: center;
-  position: relative;
-}
-#marker-photographer #item-current-location .sonar-location .sonar-wave {
-  position: absolute;
-  top: 0;
-  left: calc(50% - (21px / 2));
-  width: 21px;
-  height: 21px;
-  background: #16a085;
-  border-radius: 100%;
-  pointer-events: none;
-  z-index: -1;
-  -webkit-animation: sonarWave 2s linear infinite;
-          animation: sonarWave 2s linear infinite;
-}
-#marker-photographer #item-current-location-bar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-transition: all .3s ease;
-          transition: all .3s ease;
-  margin-top: -5px;
-  margin-bottom: -5px;
-}
 #marker-monument {
   width: 90px;
   height: 180px;
@@ -11755,6 +11674,16 @@ ion-header-bar .title {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+@-webkit-keyframes sonarWave {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    -webkit-transform: scale(5);
+            transform: scale(5);
+    opacity: 0;
+  }
 }
 @keyframes sonarWave {
   from {
@@ -11846,6 +11775,77 @@ ion-header-bar .title {
 }
 #marker-monument #item-reserve-free-shooting div i.ion-ios-arrow-right {
   margin-left: 10px;
+}
+#marker-photographer {
+  margin-left: -27px;
+  margin-top: -90px;
+  height: 100px;
+  width: 55px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+@keyframes sonarWave {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    -webkit-transform: scale(5);
+            transform: scale(5);
+    opacity: 0;
+  }
+}
+#marker-photographer #item-current-location {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: all .3s ease;
+          transition: all .3s ease;
+}
+#marker-photographer #item-current-location .sonar-location {
+  margin-bottom: -3px;
+  text-align: center;
+  position: relative;
+}
+#marker-photographer #item-current-location .sonar-location .sonar-wave {
+  position: absolute;
+  top: 0;
+  left: calc(50% - (21px / 2));
+  width: 21px;
+  height: 21px;
+  background: #16a085;
+  border-radius: 100%;
+  pointer-events: none;
+  z-index: -1;
+  -webkit-animation: sonarWave 2s linear infinite;
+          animation: sonarWave 2s linear infinite;
+}
+#marker-photographer #item-current-location-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: all .3s ease;
+          transition: all .3s ease;
+  margin-top: -5px;
+  margin-bottom: -5px;
 }
 #login ion-content {
   padding-top: 25vh;

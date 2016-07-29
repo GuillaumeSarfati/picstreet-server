@@ -1,11 +1,28 @@
 angular.module "picstreet.map"
 
-.controller "mapCtrl", ($picstreet, $scope, photographers, monuments) ->
+.controller "mapCtrl", ($rootScope, $scope, $picstreet, photographers, monuments) ->
 	
 	$scope.position = {}
 	$scope.monument = {}
 	$scope.loadPicture = false
 	$scope.content = 'monument'
+
+	# DROPZONE CONFIG ----------------------------
+	
+	$scope.dropzoneConfig = 
+		parallelUploads: 1
+		maxFileSize: 30000000000
+		url: 'http://localhost:3000/api/Buckets/picstreet-location/upload'
+
+	$scope.dropzoneEvents = 
+		addedfile: (file) -> 
+			$scope.loadPicture = true
+			$scope.$apply() unless $scope.$$phase
+		success: (file) -> 
+			$scope.monument.picture = file.name
+			$scope.$apply() unless $scope.$$phase
+	
+	# $PICSTREET CONFIG ----------------------------
 
 	$scope.center = $picstreet.center
 
@@ -23,20 +40,6 @@ angular.module "picstreet.map"
 			$picstreet.deleteMonumentInBdd monument
 			$scope.monument = {}
 
-	$scope.dropzoneConfig = 
-		parallelUploads: 1
-		maxFileSize: 30000000000
-		url: 'http://localhost:3000/api/Buckets/picstreet-location/upload'
-
-
-	$scope.dropzoneEvents = 
-		addedfile: (file) -> 
-			$scope.loadPicture = true
-			$scope.$apply() unless $scope.$$phase
-		success: (file) -> 
-			$scope.monument.picture = file.name
-			$scope.$apply() unless $scope.$$phase
-	
 	$scope.center = $picstreet.center
 	
 	$scope.monuments = monuments
@@ -48,23 +51,17 @@ angular.module "picstreet.map"
 	$scope.$on 'monument:click', (e, monument) ->
 		$picstreet.center monument
 		$scope.monument = monument
-	# $scope.reserve = $picstreet.reserve
-		
-	# $cordovaGeolocation
-	# .getCurrentPosition()
-	# .then (position) ->
-		
-	# 	$picstreet.setCurrentPosition
-	# 		lat: position.coords.latitude
-	# 		lng: position.coords.longitude
-		
-	map = $picstreet.createMap
+
+	$picstreet.init 'pk.eyJ1IjoicGl4ZXI0MiIsImEiOiJjaW91cDRqaGUwMDQ5dnRramp6cGkwMWh0In0.OpoxVVl38hLmP9XG2lk26w'
+	
+	$picstreet.map = $picstreet.createMap
 		center: 
 			lat: 48.8534100
 			lng: 2.3488000
 		zoom: 11
 
-	map.on 'click', (e) ->
+	$picstreet.map.on 'click', (e) ->
+		
 		if $scope.content is 'monument'
 			$scope.monument.lat = e.lngLat.lat
 			$scope.monument.lng = e.lngLat.lng
@@ -73,29 +70,11 @@ angular.module "picstreet.map"
 	$picstreet.createPhotographers photographers
 	$picstreet.createMonuments monuments
 		
-	# 	$picstreet.createCustomer
-	# 		center:
-	# 			lat: position.coords.latitude
-	# 			lng: position.coords.longitude
+	$rootScope.$on 'photographer:position:update', (e, position) ->
 
-	# $scope.$on "$ionicSlides.sliderInitialized", (event, data) ->
-	# 	$scope.slider = data.slider
+		$picstreet.updatePhotographerPosition
+			photographerId: position.photographerId
+			position: position
 
-	# $scope.$on "$ionicSlides.slideChangeEnd", (event, data) ->
-
-	# 	console.log 'SLIDE CHANGED : ', data.slider.activeIndex - 1
-	# 	if data.slider.activeIndex
-	# 		$scope.center($scope.monuments[data.slider.activeIndex - 1])
-	# 	else
-	# 		$scope.center $picstreet.getCurrentPosition()
-
-	# $rootScope.$on 'customer:position:update', (e, position) ->
-	# 	$picstreet.updateCustomerPosition position
-	# 	$picstreet.center position.coord
-
-	# $rootScope.$on 'photographer:position:update', (e, position) ->
-
- # 		$picstreet.updatePhotographerPosition
- # 			photographerId: position.photographerId
- # 			position: position
-			
+	return
+		

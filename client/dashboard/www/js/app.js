@@ -17,7 +17,7 @@ __rights = {
 
 __uptime = moment();
 
-angular.module('picstreet', ['ngResource', 'ngCordova', 'ngStorage', 'ionic', 'ionic-native-transitions', 'lbServices', 'ngIOS9UIWebViewPatch', 'picstreet.translate', 'picstreet.directives', 'picstreet.authenticated', 'picstreet.unauthenticated']).config(function($ionicNativeTransitionsProvider, $ionicConfigProvider, $urlRouterProvider, LoopBackResourceProvider, $httpProvider) {
+angular.module('picstreet', ['ngResource', 'ngCordova', 'ngStorage', 'ionic', 'ionic-native-transitions', 'lbServices', 'ngPicstreet', 'ngIOS9UIWebViewPatch', 'picstreet.translate', 'picstreet.directives', 'picstreet.authenticated', 'picstreet.unauthenticated']).config(function($ionicNativeTransitionsProvider, $ionicConfigProvider, $urlRouterProvider, LoopBackResourceProvider, $httpProvider) {
   $ionicConfigProvider.views.swipeBackEnabled(false);
   $ionicNativeTransitionsProvider.setDefaultOptions({
     duration: 400,
@@ -288,221 +288,6 @@ angular.module('ngIOS9UIWebViewPatch', ['ng']).config([
   }
 ]);
 
-angular.module('picstreet').service('$picstreet', function(Location, $cordovaDialogs, $ionicActionSheet, $timeout, $templateCache, $cordovaActionSheet, $compile, $rootScope) {
-  var $picstreet, currentPosition, customer, map, monumentsOnMap, photographersOnMap;
-  currentPosition = {};
-  photographersOnMap = {};
-  monumentsOnMap = {};
-  customer = {};
-  map = {};
-  return $picstreet = {
-    createMap: function(opts) {
-      mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZXI0MiIsImEiOiJjaW91cDRqaGUwMDQ5dnRramp6cGkwMWh0In0.OpoxVVl38hLmP9XG2lk26w';
-      return map = new mapboxgl.Map({
-        container: 'map',
-        zoom: opts.zoom,
-        center: opts.center,
-        width: '100vw',
-        height: '100vh',
-        style: 'mapbox://styles/pixer42/ciqozlkde003bcaneqk26ipny'
-      });
-    },
-    createMarker: function(templateName, scope) {
-      var element, marker, template;
-      template = $templateCache.get(templateName + ".marker.html");
-      element = $compile(template)(scope)[0];
-      return marker = new mapboxgl.Marker(element);
-    },
-    createCustomer: function(opts) {
-      var scope;
-      scope = $rootScope.$new();
-      customer = $picstreet.createMarker('me', scope);
-      customer.setLngLat(opts.center);
-      return customer.addTo(map);
-    },
-    updateCustomerPosition: function(position) {
-      return customer.marker.setLngLat(position.coord);
-    },
-    createMonumentInBdd: function(monument) {
-      return Location.create(monument).$promise.then(function(monument) {
-        return $picstreet.createMonument(monument);
-      })["catch"](function(err) {
-        return console.log('err : ', err);
-      });
-    },
-    updateMonumentInBdd: function(monument) {
-      monumentsOnMap[monument.id].marker.remove();
-      return Location.upsert(monument).$promise.then(function(monument) {
-        return $picstreet.createMonument(monument);
-      })["catch"](function(err) {
-        return console.log('err : ', err);
-      });
-    },
-    deleteMonumentInBdd: function(monument) {
-      monumentsOnMap[monument.id].marker.remove();
-      return Location.deleteById({
-        id: monument.id
-      }).$promise.then(function(monument) {
-        return console.log('success delete');
-      })["catch"](function(err) {
-        return console.log('err : ', err);
-      });
-    },
-    createMonuments: function(monuments) {
-      var i, len, monument, results;
-      results = [];
-      for (i = 0, len = monuments.length; i < len; i++) {
-        monument = monuments[i];
-        results.push($picstreet.createMonument(monument));
-      }
-      return results;
-    },
-    createMonument: function(opts) {
-      var monument, scope;
-      scope = $rootScope.$new();
-      scope.monument = opts;
-      scope.api = __API_URL__;
-      scope.onClick = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        return $rootScope.$broadcast('monument:click', opts);
-      };
-      monument = $picstreet.createMarker('monument', scope);
-      monument.setLngLat({
-        lat: opts.lat,
-        lng: opts.lng
-      });
-      monumentsOnMap[opts.id] = {};
-      monumentsOnMap[opts.id].marker = monument;
-      return monument.addTo(map);
-    },
-    createPhotographer: function(photographer) {
-      if (photographer.positions[0]) {
-        return $picstreet.photographerAddToMap(photographer.id, photographer.positions[photographer.positions.length - 1]);
-      }
-    },
-    createPhotographers: function(photographers) {
-      var i, len, photographer, results;
-      results = [];
-      for (i = 0, len = photographers.length; i < len; i++) {
-        photographer = photographers[i];
-        results.push($picstreet.createPhotographer(photographer));
-      }
-      return results;
-    },
-    updatePhotographerPosition: function(opts) {
-      return $picstreet.photographerAddToMap(opts.photographerId, opts.position);
-    },
-    watchPhotographer: function() {},
-    photographerAssignPosition: function(photographerId, position) {
-      var scope;
-      if (position.available) {
-        scope = $rootScope.$new();
-        scope.onClick = function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log('POSITION : ', position);
-          $picstreet.center(position.coord);
-          return $ionicActionSheet.show({
-            titleText: 'What do you want to do ?',
-            buttons: [
-              {
-                text: "Go to Photographer"
-              }, {
-                text: "Ask the photographer to come"
-              }
-            ],
-            cancelText: 'Cancel',
-            buttonClicked: function(index) {
-              if (index === 0) {
-                $picstreet.goTo(position.coord);
-              }
-              if (index === 1) {
-                return $picstreet.reserve();
-              }
-            }
-          });
-        };
-        photographersOnMap[photographerId] = {
-          photographer: {
-            id: photographerId,
-            positions: [position]
-          },
-          marker: $picstreet.createMarker('photographer', scope)
-        };
-        photographersOnMap[photographerId].marker.setLngLat(position.coord).addTo(map);
-      }
-    },
-    photographerUpdatePosition: function(photographerId, position) {
-      if (position.available) {
-        photographersOnMap[photographerId].photographer.positions.push(position);
-        photographersOnMap[photographerId].marker.setLngLat(position.coord);
-      } else {
-        photographersOnMap[photographerId].marker.remove();
-        photographersOnMap[photographerId] = void 0;
-      }
-    },
-    photographerIsAlreadyAvailable: function(photographerId) {
-      if (!photographersOnMap[photographerId]) {
-        return false;
-      }
-      if (!photographersOnMap[photographerId].photographer) {
-        return false;
-      }
-      if (!photographersOnMap[photographerId].photographer.positions[photographersOnMap[photographerId].photographer.positions.length - 1]) {
-        return false;
-      }
-      if (!photographersOnMap[photographerId].photographer.positions[photographersOnMap[photographerId].photographer.positions.length - 1].available) {
-        return false;
-      }
-      return true;
-    },
-    photographerAddToMap: function(photographerId, position) {
-      if ($picstreet.photographerIsAlreadyAvailable(photographerId)) {
-        return $picstreet.photographerUpdatePosition(photographerId, position);
-      } else {
-        return $picstreet.photographerAssignPosition(photographerId, position);
-      }
-    },
-    center: function(location, zoom) {
-      if (location == null) {
-        location = currentPosition;
-      }
-      if (zoom == null) {
-        zoom = 15;
-      }
-      return setTimeout(function() {
-        return ionic.requestAnimationFrame(function() {
-          return map.flyTo({
-            center: {
-              lat: location.lat,
-              lng: location.lng
-            },
-            zoom: zoom,
-            speed: 2,
-            curve: 1,
-            easing: function(t) {
-              return t;
-            }
-          });
-        });
-      }, 100);
-    },
-    setCurrentPosition: function(coord) {
-      return currentPosition = coord;
-    },
-    getCurrentPosition: function() {
-      return currentPosition;
-    },
-    goTo: function(opts) {
-      return window.open("http://maps.apple.com/?daddr=" + opts.lat + "," + opts.lng + "&dirflg=w", '_system');
-    },
-    reserve: function() {
-      return $cordovaDialogs.alert('Sorry this service is not yet available in Paris, you can only join a photographer.', 'PicStreet', 'Ok');
-    }
-  };
-});
-
 String.prototype.camelCaseToDash = function() {
   return this.replace(/([A-Z])/g, function($1) {
     return "-" + $1.toLowerCase();
@@ -537,6 +322,8 @@ angular.module('picstreet').factory('$socket', function(LoopBackAuth) {
 
 
 
+angular.module('picstreet.unauthenticated', ['picstreet.login', 'picstreet.signup']);
+
 angular.module('picstreet.authenticated', ['picstreet.map', 'picstreet.payment', 'picstreet.customers', 'picstreet.customer', 'picstreet.photographers', 'picstreet.albums', 'picstreet.album']).config(function($stateProvider) {
   return $stateProvider.state('authenticated', {
     abstract: true,
@@ -564,7 +351,47 @@ angular.module('picstreet.authenticated').controller('authenticatedCtrl', functi
   };
 });
 
-angular.module('picstreet.unauthenticated', ['picstreet.login', 'picstreet.signup']);
+angular.module("picstreet.login", []).config(function($stateProvider) {
+  return $stateProvider.state('login', {
+    url: '/login',
+    templateUrl: 'login.view.html',
+    controller: 'loginCtrl'
+  });
+}).run(function() {});
+
+angular.module("picstreet.login").controller("loginCtrl", function($scope, $state, $connect) {
+  $scope.login = function(me) {
+    return $connect.login(me, function(accessToken) {
+      return $connect.remember(function(me) {
+        if (me) {
+          return $state.go('authenticated.map');
+        }
+      });
+    });
+  };
+  return $scope.signup = function() {
+    return $state.go('signup');
+  };
+});
+
+angular.module("picstreet.signup", []).config(function($stateProvider) {
+  $stateProvider.state('signup', {
+    url: '/signup',
+    templateUrl: 'signup.view.html',
+    controller: 'signupCtrl'
+  });
+}).run(function() {});
+
+angular.module("picstreet.signup").controller("signupCtrl", function($scope, $state, $connect) {
+  $scope.signup = function(me) {
+    return $connect.signup(me, {}, function(response) {
+      return $state.go('authenticated.map');
+    });
+  };
+  return $scope.back = function() {
+    return $state.go('login');
+  };
+});
 
 angular.module("picstreet.album", ['ngDropzone']).config(function($stateProvider) {
   $stateProvider.state('authenticated.album', {
@@ -706,13 +533,6 @@ angular.module("picstreet.albums").controller("albumsCtrl", function(albums, $ro
   return console.log('ALBUMS PURCHASE ', $scope.albums);
 });
 
-angular.module('picstreet.directives').directive('markerMonument', function() {
-  return {
-    restrict: 'E',
-    templateUrl: 'monument.marker.html'
-  };
-});
-
 angular.module("picstreet.customer", []).config(function($stateProvider) {
   $stateProvider.state('authenticated.customer', {
     url: '/customer/:id',
@@ -809,29 +629,11 @@ angular.module("picstreet.map", ['leaflet-directive']).config(function($statePro
   });
 }).run(function() {});
 
-angular.module("picstreet.map").controller("mapCtrl", function($picstreet, $scope, photographers, monuments) {
-  var map;
+angular.module("picstreet.map").controller("mapCtrl", function($rootScope, $scope, $picstreet, photographers, monuments) {
   $scope.position = {};
   $scope.monument = {};
   $scope.loadPicture = false;
   $scope.content = 'monument';
-  $scope.center = $picstreet.center;
-  $scope.createMonument = function(monument) {
-    $picstreet.center($scope.position, 8);
-    return $picstreet.createMonumentInBdd(monument);
-  };
-  $scope.updateMonument = function(monument) {
-    if (confirm("Are you sur to update " + monument.name + " ?")) {
-      $picstreet.updateMonumentInBdd(monument);
-      return $scope.monument = {};
-    }
-  };
-  $scope.deleteMonument = function(monument) {
-    if (confirm("Are you sur to delete " + monument.name + " ?")) {
-      $picstreet.deleteMonumentInBdd(monument);
-      return $scope.monument = {};
-    }
-  };
   $scope.dropzoneConfig = {
     parallelUploads: 1,
     maxFileSize: 30000000000,
@@ -852,6 +654,23 @@ angular.module("picstreet.map").controller("mapCtrl", function($picstreet, $scop
     }
   };
   $scope.center = $picstreet.center;
+  $scope.createMonument = function(monument) {
+    $picstreet.center($scope.position, 8);
+    return $picstreet.createMonumentInBdd(monument);
+  };
+  $scope.updateMonument = function(monument) {
+    if (confirm("Are you sur to update " + monument.name + " ?")) {
+      $picstreet.updateMonumentInBdd(monument);
+      return $scope.monument = {};
+    }
+  };
+  $scope.deleteMonument = function(monument) {
+    if (confirm("Are you sur to delete " + monument.name + " ?")) {
+      $picstreet.deleteMonumentInBdd(monument);
+      return $scope.monument = {};
+    }
+  };
+  $scope.center = $picstreet.center;
   $scope.monuments = monuments;
   $scope.photographers = photographers;
   console.info('[ PHOTOGRAPHERS ]', photographers);
@@ -860,14 +679,15 @@ angular.module("picstreet.map").controller("mapCtrl", function($picstreet, $scop
     $picstreet.center(monument);
     return $scope.monument = monument;
   });
-  map = $picstreet.createMap({
+  $picstreet.init('pk.eyJ1IjoicGl4ZXI0MiIsImEiOiJjaW91cDRqaGUwMDQ5dnRramp6cGkwMWh0In0.OpoxVVl38hLmP9XG2lk26w');
+  $picstreet.map = $picstreet.createMap({
     center: {
       lat: 48.8534100,
       lng: 2.3488000
     },
     zoom: 11
   });
-  map.on('click', function(e) {
+  $picstreet.map.on('click', function(e) {
     if ($scope.content === 'monument') {
       $scope.monument.lat = e.lngLat.lat;
       $scope.monument.lng = e.lngLat.lng;
@@ -877,7 +697,13 @@ angular.module("picstreet.map").controller("mapCtrl", function($picstreet, $scop
     }
   });
   $picstreet.createPhotographers(photographers);
-  return $picstreet.createMonuments(monuments);
+  $picstreet.createMonuments(monuments);
+  $rootScope.$on('photographer:position:update', function(e, position) {
+    return $picstreet.updatePhotographerPosition({
+      photographerId: position.photographerId,
+      position: position
+    });
+  });
 });
 
 angular.module("picstreet.payment", []).config(function($stateProvider) {
@@ -1033,46 +859,4 @@ angular.module("picstreet.photographers").controller("photographersCtrl", functi
   })["catch"](function(err) {
     return console.log(err);
   });
-});
-
-angular.module("picstreet.login", []).config(function($stateProvider) {
-  return $stateProvider.state('login', {
-    url: '/login',
-    templateUrl: 'login.view.html',
-    controller: 'loginCtrl'
-  });
-}).run(function() {});
-
-angular.module("picstreet.login").controller("loginCtrl", function($scope, $state, $connect) {
-  $scope.login = function(me) {
-    return $connect.login(me, function(accessToken) {
-      return $connect.remember(function(me) {
-        if (me) {
-          return $state.go('authenticated.map');
-        }
-      });
-    });
-  };
-  return $scope.signup = function() {
-    return $state.go('signup');
-  };
-});
-
-angular.module("picstreet.signup", []).config(function($stateProvider) {
-  $stateProvider.state('signup', {
-    url: '/signup',
-    templateUrl: 'signup.view.html',
-    controller: 'signupCtrl'
-  });
-}).run(function() {});
-
-angular.module("picstreet.signup").controller("signupCtrl", function($scope, $state, $connect) {
-  $scope.signup = function(me) {
-    return $connect.signup(me, {}, function(response) {
-      return $state.go('authenticated.map');
-    });
-  };
-  return $scope.back = function() {
-    return $state.go('login');
-  };
 });
