@@ -8,7 +8,7 @@ app.start = ->
 	# start the web server
 	app.listen ->
 		app.emit 'started'
-		console.log "[ #{moment().format('HH:mm:ss')} ] Pixer server listening at : #{app.get('url')}"
+		console.log "[ #{moment().format('HH:mm:ss')} ] PicStreet server listening at : #{app.get('url')}"
 
 # Bootstrap the application, configure models, datasources and middleware.
 # Sub-apps like REST API are mounted via boot scripts.

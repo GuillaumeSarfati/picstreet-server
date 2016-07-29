@@ -21,15 +21,11 @@ npm-debug.log
 
 # CUSTOM
 
-client/landing/www
-
-client/customer/www
-client/customer/platforms/android
-client/customer/platforms/ios
-
-client/photographer/www
-client/photographer/platforms/android
-client/photographer/platforms/ios
+client/customer/
+client/landing/
+client/photographer/
+client/dashboard/www
+common/modules/
 
 node_modules
 bower_components
