@@ -12,6 +12,11 @@ angular.module "picstreet.map", ['leaflet-directive']
 				templateUrl: 'map.view.html'
 				controller: 'mapCtrl'
 
+		grantedRoles: [
+			'$administrator'
+			'$photographer'
+			'$manager'
+		]
 
 		resolve: 
 

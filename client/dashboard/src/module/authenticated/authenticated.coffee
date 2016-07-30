@@ -17,7 +17,8 @@ angular.module 'picstreet.authenticated', [
 	$stateProvider
 
 	.state 'authenticated',
-    abstract: true
-    templateUrl: 'authenticated.view.html'
-    controller: "authenticatedCtrl"
+		abstract: true
+		templateUrl: 'authenticated.view.html'
+		controller: "authenticatedCtrl"
 
+	

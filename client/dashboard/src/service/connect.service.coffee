@@ -36,20 +36,22 @@ angular.module 'picstreet'
 
 			Photographer.logout()
 			callback()
+			$rootScope.$emit '$unauthenticated'
 
 		remember: (callback=->) ->
 			
 			if window.localStorage.getItem '$LoopBack$accessTokenId'
 				
-				console.log '$connect:localStorage'
-				
 				Photographer.getCurrent 
 					filter:
-						include: 'albums'
+						include: [
+							'roles'
+							'albums'
+						]
 				.$promise
 				.then (me) ->
 					$rootScope.me = me
-					console.log 'ME : ', me
+					$rootScope.$emit '$authenticated', me
 					callback me
 				.catch (err) -> callback false
 			else

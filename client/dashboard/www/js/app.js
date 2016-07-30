@@ -134,21 +134,21 @@ angular.module('picstreet').service('$connect', function(LoopBackAuth, Photograp
     },
     logout: function(callback) {
       Photographer.logout();
-      return callback();
+      callback();
+      return $rootScope.$emit('$unauthenticated');
     },
     remember: function(callback) {
       if (callback == null) {
         callback = function() {};
       }
       if (window.localStorage.getItem('$LoopBack$accessTokenId')) {
-        console.log('$connect:localStorage');
         return Photographer.getCurrent({
           filter: {
-            include: 'albums'
+            include: ['roles', 'albums']
           }
         }).$promise.then(function(me) {
           $rootScope.me = me;
-          console.log('ME : ', me);
+          $rootScope.$emit('$authenticated', me);
           return callback(me);
         })["catch"](function(err) {
           return callback(false);
@@ -322,8 +322,6 @@ angular.module('picstreet').factory('$socket', function(LoopBackAuth) {
 
 
 
-angular.module('picstreet.unauthenticated', ['picstreet.login', 'picstreet.signup']);
-
 angular.module('picstreet.authenticated', ['picstreet.map', 'picstreet.payment', 'picstreet.customers', 'picstreet.customer', 'picstreet.photographers', 'picstreet.albums', 'picstreet.album']).config(function($stateProvider) {
   return $stateProvider.state('authenticated', {
     abstract: true,
@@ -351,47 +349,7 @@ angular.module('picstreet.authenticated').controller('authenticatedCtrl', functi
   };
 });
 
-angular.module("picstreet.login", []).config(function($stateProvider) {
-  return $stateProvider.state('login', {
-    url: '/login',
-    templateUrl: 'login.view.html',
-    controller: 'loginCtrl'
-  });
-}).run(function() {});
-
-angular.module("picstreet.login").controller("loginCtrl", function($scope, $state, $connect) {
-  $scope.login = function(me) {
-    return $connect.login(me, function(accessToken) {
-      return $connect.remember(function(me) {
-        if (me) {
-          return $state.go('authenticated.map');
-        }
-      });
-    });
-  };
-  return $scope.signup = function() {
-    return $state.go('signup');
-  };
-});
-
-angular.module("picstreet.signup", []).config(function($stateProvider) {
-  $stateProvider.state('signup', {
-    url: '/signup',
-    templateUrl: 'signup.view.html',
-    controller: 'signupCtrl'
-  });
-}).run(function() {});
-
-angular.module("picstreet.signup").controller("signupCtrl", function($scope, $state, $connect) {
-  $scope.signup = function(me) {
-    return $connect.signup(me, {}, function(response) {
-      return $state.go('authenticated.map');
-    });
-  };
-  return $scope.back = function() {
-    return $state.go('login');
-  };
-});
+angular.module('picstreet.unauthenticated', ['picstreet.login', 'picstreet.signup']);
 
 angular.module("picstreet.album", ['ngDropzone']).config(function($stateProvider) {
   $stateProvider.state('authenticated.album', {
@@ -609,6 +567,7 @@ angular.module("picstreet.map", ['leaflet-directive']).config(function($statePro
         controller: 'mapCtrl'
       }
     },
+    grantedRoles: ['$administrator', '$photographer', '$manager'],
     resolve: {
       photographers: function(Photographer) {
         return Photographer.find({
@@ -849,7 +808,8 @@ angular.module("picstreet.photographers", []).config(function($stateProvider) {
         templateUrl: 'photographers.view.html',
         controller: 'photographersCtrl'
       }
-    }
+    },
+    grantedRoles: ['$manager']
   });
 }).run(function() {});
 
@@ -859,4 +819,46 @@ angular.module("picstreet.photographers").controller("photographersCtrl", functi
   })["catch"](function(err) {
     return console.log(err);
   });
+});
+
+angular.module("picstreet.login", []).config(function($stateProvider) {
+  return $stateProvider.state('login', {
+    url: '/login',
+    templateUrl: 'login.view.html',
+    controller: 'loginCtrl'
+  });
+}).run(function() {});
+
+angular.module("picstreet.login").controller("loginCtrl", function($scope, $state, $connect) {
+  $scope.login = function(me) {
+    return $connect.login(me, function(accessToken) {
+      return $connect.remember(function(me) {
+        if (me) {
+          return $state.go('authenticated.map');
+        }
+      });
+    });
+  };
+  return $scope.signup = function() {
+    return $state.go('signup');
+  };
+});
+
+angular.module("picstreet.signup", []).config(function($stateProvider) {
+  $stateProvider.state('signup', {
+    url: '/signup',
+    templateUrl: 'signup.view.html',
+    controller: 'signupCtrl'
+  });
+}).run(function() {});
+
+angular.module("picstreet.signup").controller("signupCtrl", function($scope, $state, $connect) {
+  $scope.signup = function(me) {
+    return $connect.signup(me, {}, function(response) {
+      return $state.go('authenticated.map');
+    });
+  };
+  return $scope.back = function() {
+    return $state.go('login');
+  };
 });

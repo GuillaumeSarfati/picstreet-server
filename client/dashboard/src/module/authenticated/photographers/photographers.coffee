@@ -10,7 +10,9 @@ angular.module "picstreet.photographers", []
 			menuContent:
 				templateUrl: 'photographers.view.html'
 				controller: 'photographersCtrl'
-				
+		
+		grantedRoles: ['$manager']	
+
 	return
 
 .run ->

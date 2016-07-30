@@ -1332,6 +1332,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use RoleMapping.principal() instead.
+            "prototype$__get__principal": {
+              url: urlBase + "/RoleMappings/:id/principal",
+              method: "GET",
+            },
+
             /**
              * @ngdoc method
              * @name lbServices.RoleMapping#create
@@ -1753,65 +1759,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/RoleMappings/change-stream",
               method: "POST",
             },
-
-            // INTERNAL. Use Role.principals.findById() instead.
-            "::findById::Role::principals": {
-              params: {
-                'fk': '@fk',
-              },
-              url: urlBase + "/Roles/:id/principals/:fk",
-              method: "GET",
-            },
-
-            // INTERNAL. Use Role.principals.destroyById() instead.
-            "::destroyById::Role::principals": {
-              params: {
-                'fk': '@fk',
-              },
-              url: urlBase + "/Roles/:id/principals/:fk",
-              method: "DELETE",
-            },
-
-            // INTERNAL. Use Role.principals.updateById() instead.
-            "::updateById::Role::principals": {
-              params: {
-                'fk': '@fk',
-              },
-              url: urlBase + "/Roles/:id/principals/:fk",
-              method: "PUT",
-            },
-
-            // INTERNAL. Use Role.principals() instead.
-            "::get::Role::principals": {
-              isArray: true,
-              url: urlBase + "/Roles/:id/principals",
-              method: "GET",
-            },
-
-            // INTERNAL. Use Role.principals.create() instead.
-            "::create::Role::principals": {
-              url: urlBase + "/Roles/:id/principals",
-              method: "POST",
-            },
-
-            // INTERNAL. Use Role.principals.createMany() instead.
-            "::createMany::Role::principals": {
-              isArray: true,
-              url: urlBase + "/Roles/:id/principals",
-              method: "POST",
-            },
-
-            // INTERNAL. Use Role.principals.destroyAll() instead.
-            "::delete::Role::principals": {
-              url: urlBase + "/Roles/:id/principals",
-              method: "DELETE",
-            },
-
-            // INTERNAL. Use Role.principals.count() instead.
-            "::count::Role::principals": {
-              url: urlBase + "/Roles/:id/principals/count",
-              method: "GET",
-            },
           }
         );
 
@@ -1991,6 +1938,42 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           return action.apply(R, arguments);
         };
 
+            /**
+             * @ngdoc method
+             * @name lbServices.RoleMapping#principal
+             * @methodOf lbServices.RoleMapping
+             *
+             * @description
+             *
+             * Fetches belongsTo relation principal.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Photographer` object.)
+             * </em>
+             */
+        R.principal = function() {
+          var TargetResource = $injector.get("Photographer");
+          var action = TargetResource["::get::RoleMapping::principal"];
+          return action.apply(R, arguments);
+        };
+
 
         return R;
       }]);
@@ -2047,6 +2030,33 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               },
               url: urlBase + "/Roles/:id/principals/:fk",
               method: "PUT",
+            },
+
+            // INTERNAL. Use Role.principals.link() instead.
+            "prototype$__link__principals": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Roles/:id/principals/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Role.principals.unlink() instead.
+            "prototype$__unlink__principals": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Roles/:id/principals/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Role.principals.exists() instead.
+            "prototype$__exists__principals": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Roles/:id/principals/rel/:fk",
+              method: "HEAD",
             },
 
             // INTERNAL. Use Role.principals() instead.
@@ -2501,6 +2511,92 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/RoleMappings/:id/role",
               method: "GET",
             },
+
+            // INTERNAL. Use Photographer.roles.findById() instead.
+            "::findById::Photographer::roles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Photographers/:id/roles/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Photographer.roles.destroyById() instead.
+            "::destroyById::Photographer::roles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Photographers/:id/roles/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Photographer.roles.updateById() instead.
+            "::updateById::Photographer::roles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Photographers/:id/roles/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Photographer.roles.link() instead.
+            "::link::Photographer::roles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Photographers/:id/roles/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Photographer.roles.unlink() instead.
+            "::unlink::Photographer::roles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Photographers/:id/roles/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Photographer.roles.exists() instead.
+            "::exists::Photographer::roles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Photographers/:id/roles/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use Photographer.roles() instead.
+            "::get::Photographer::roles": {
+              isArray: true,
+              url: urlBase + "/Photographers/:id/roles",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Photographer.roles.create() instead.
+            "::create::Photographer::roles": {
+              url: urlBase + "/Photographers/:id/roles",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Photographer.roles.createMany() instead.
+            "::createMany::Photographer::roles": {
+              isArray: true,
+              url: urlBase + "/Photographers/:id/roles",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Photographer.roles.destroyAll() instead.
+            "::delete::Photographer::roles": {
+              url: urlBase + "/Photographers/:id/roles",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Photographer.roles.count() instead.
+            "::count::Photographer::roles": {
+              url: urlBase + "/Photographers/:id/roles/count",
+              method: "GET",
+            },
           }
         );
 
@@ -2651,7 +2747,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
      * @description
      *
      * The object `Role.principals` groups methods
-     * manipulating `RoleMapping` instances related to `Role`.
+     * manipulating `Photographer` instances related to `Role`.
      *
      * Call {@link lbServices.Role#principals Role.principals()}
      * to query all related instances.
@@ -2685,11 +2781,11 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              * <em>
              * (The remote method definition does not provide any description.
-             * This usually means the response is a `RoleMapping` object.)
+             * This usually means the response is a `Photographer` object.)
              * </em>
              */
         R.principals = function() {
-          var TargetResource = $injector.get("RoleMapping");
+          var TargetResource = $injector.get("Photographer");
           var action = TargetResource["::get::Role::principals"];
           return action.apply(R, arguments);
         };
@@ -2724,7 +2820,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *  - `count` – `{number=}` -
              */
         R.principals.count = function() {
-          var TargetResource = $injector.get("RoleMapping");
+          var TargetResource = $injector.get("Photographer");
           var action = TargetResource["::count::Role::principals"];
           return action.apply(R, arguments);
         };
@@ -2758,11 +2854,11 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              * <em>
              * (The remote method definition does not provide any description.
-             * This usually means the response is a `RoleMapping` object.)
+             * This usually means the response is a `Photographer` object.)
              * </em>
              */
         R.principals.create = function() {
-          var TargetResource = $injector.get("RoleMapping");
+          var TargetResource = $injector.get("Photographer");
           var action = TargetResource["::create::Role::principals"];
           return action.apply(R, arguments);
         };
@@ -2796,11 +2892,11 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              * <em>
              * (The remote method definition does not provide any description.
-             * This usually means the response is a `RoleMapping` object.)
+             * This usually means the response is a `Photographer` object.)
              * </em>
              */
         R.principals.createMany = function() {
-          var TargetResource = $injector.get("RoleMapping");
+          var TargetResource = $injector.get("Photographer");
           var action = TargetResource["::createMany::Role::principals"];
           return action.apply(R, arguments);
         };
@@ -2831,7 +2927,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This method returns no data.
              */
         R.principals.destroyAll = function() {
-          var TargetResource = $injector.get("RoleMapping");
+          var TargetResource = $injector.get("Photographer");
           var action = TargetResource["::delete::Role::principals"];
           return action.apply(R, arguments);
         };
@@ -2864,8 +2960,44 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This method returns no data.
              */
         R.principals.destroyById = function() {
-          var TargetResource = $injector.get("RoleMapping");
+          var TargetResource = $injector.get("Photographer");
           var action = TargetResource["::destroyById::Role::principals"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Role.principals#exists
+             * @methodOf lbServices.Role.principals
+             *
+             * @description
+             *
+             * Check the existence of principals relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for principals
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Photographer` object.)
+             * </em>
+             */
+        R.principals.exists = function() {
+          var TargetResource = $injector.get("Photographer");
+          var action = TargetResource["::exists::Role::principals"];
           return action.apply(R, arguments);
         };
 
@@ -2896,12 +3028,85 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              * <em>
              * (The remote method definition does not provide any description.
-             * This usually means the response is a `RoleMapping` object.)
+             * This usually means the response is a `Photographer` object.)
              * </em>
              */
         R.principals.findById = function() {
-          var TargetResource = $injector.get("RoleMapping");
+          var TargetResource = $injector.get("Photographer");
           var action = TargetResource["::findById::Role::principals"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Role.principals#link
+             * @methodOf lbServices.Role.principals
+             *
+             * @description
+             *
+             * Add a related item by id for principals.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for principals
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Photographer` object.)
+             * </em>
+             */
+        R.principals.link = function() {
+          var TargetResource = $injector.get("Photographer");
+          var action = TargetResource["::link::Role::principals"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Role.principals#unlink
+             * @methodOf lbServices.Role.principals
+             *
+             * @description
+             *
+             * Remove the principals relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for principals
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.principals.unlink = function() {
+          var TargetResource = $injector.get("Photographer");
+          var action = TargetResource["::unlink::Role::principals"];
           return action.apply(R, arguments);
         };
 
@@ -2936,11 +3141,11 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              * <em>
              * (The remote method definition does not provide any description.
-             * This usually means the response is a `RoleMapping` object.)
+             * This usually means the response is a `Photographer` object.)
              * </em>
              */
         R.principals.updateById = function() {
-          var TargetResource = $injector.get("RoleMapping");
+          var TargetResource = $injector.get("Photographer");
           var action = TargetResource["::updateById::Role::principals"];
           return action.apply(R, arguments);
         };
@@ -9493,6 +9698,60 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "PUT",
             },
 
+            // INTERNAL. Use Photographer.roles.findById() instead.
+            "prototype$__findById__roles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Photographers/:id/roles/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Photographer.roles.destroyById() instead.
+            "prototype$__destroyById__roles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Photographers/:id/roles/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Photographer.roles.updateById() instead.
+            "prototype$__updateById__roles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Photographers/:id/roles/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Photographer.roles.link() instead.
+            "prototype$__link__roles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Photographers/:id/roles/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Photographer.roles.unlink() instead.
+            "prototype$__unlink__roles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Photographers/:id/roles/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Photographer.roles.exists() instead.
+            "prototype$__exists__roles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Photographers/:id/roles/rel/:fk",
+              method: "HEAD",
+            },
+
             /**
              * @ngdoc method
              * @name lbServices.Photographer#prototype$__get__accessTokens
@@ -9727,6 +9986,31 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use Photographer.positions.count() instead.
             "prototype$__count__positions": {
               url: urlBase + "/Photographers/:id/positions/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Photographer.roles() instead.
+            "prototype$__get__roles": {
+              isArray: true,
+              url: urlBase + "/Photographers/:id/roles",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Photographer.roles.create() instead.
+            "prototype$__create__roles": {
+              url: urlBase + "/Photographers/:id/roles",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Photographer.roles.destroyAll() instead.
+            "prototype$__delete__roles": {
+              url: urlBase + "/Photographers/:id/roles",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Photographer.roles.count() instead.
+            "prototype$__count__roles": {
+              url: urlBase + "/Photographers/:id/roles/count",
               method: "GET",
             },
 
@@ -10322,6 +10606,98 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             "resetPassword": {
               url: urlBase + "/Photographers/reset",
               method: "POST",
+            },
+
+            // INTERNAL. Use RoleMapping.principal() instead.
+            "::get::RoleMapping::principal": {
+              url: urlBase + "/RoleMappings/:id/principal",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Role.principals.findById() instead.
+            "::findById::Role::principals": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Roles/:id/principals/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Role.principals.destroyById() instead.
+            "::destroyById::Role::principals": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Roles/:id/principals/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Role.principals.updateById() instead.
+            "::updateById::Role::principals": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Roles/:id/principals/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Role.principals.link() instead.
+            "::link::Role::principals": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Roles/:id/principals/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Role.principals.unlink() instead.
+            "::unlink::Role::principals": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Roles/:id/principals/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Role.principals.exists() instead.
+            "::exists::Role::principals": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/Roles/:id/principals/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use Role.principals() instead.
+            "::get::Role::principals": {
+              isArray: true,
+              url: urlBase + "/Roles/:id/principals",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Role.principals.create() instead.
+            "::create::Role::principals": {
+              url: urlBase + "/Roles/:id/principals",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Role.principals.createMany() instead.
+            "::createMany::Role::principals": {
+              isArray: true,
+              url: urlBase + "/Roles/:id/principals",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Role.principals.destroyAll() instead.
+            "::delete::Role::principals": {
+              url: urlBase + "/Roles/:id/principals",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use Role.principals.count() instead.
+            "::count::Role::principals": {
+              url: urlBase + "/Roles/:id/principals/count",
+              method: "GET",
             },
 
             /**
@@ -11747,6 +12123,416 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.positions.updateById = function() {
           var TargetResource = $injector.get("Position");
           var action = TargetResource["::updateById::Photographer::positions"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Photographer.roles
+     * @header lbServices.Photographer.roles
+     * @object
+     * @description
+     *
+     * The object `Photographer.roles` groups methods
+     * manipulating `Role` instances related to `Photographer`.
+     *
+     * Call {@link lbServices.Photographer#roles Photographer.roles()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Photographer#roles
+             * @methodOf lbServices.Photographer
+             *
+             * @description
+             *
+             * Queries roles of Photographer.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Role` object.)
+             * </em>
+             */
+        R.roles = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::get::Photographer::roles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Photographer.roles#count
+             * @methodOf lbServices.Photographer.roles
+             *
+             * @description
+             *
+             * Counts roles of Photographer.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.roles.count = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::count::Photographer::roles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Photographer.roles#create
+             * @methodOf lbServices.Photographer.roles
+             *
+             * @description
+             *
+             * Creates a new instance in roles of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Role` object.)
+             * </em>
+             */
+        R.roles.create = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::create::Photographer::roles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Photographer.roles#createMany
+             * @methodOf lbServices.Photographer.roles
+             *
+             * @description
+             *
+             * Creates a new instance in roles of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Role` object.)
+             * </em>
+             */
+        R.roles.createMany = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::createMany::Photographer::roles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Photographer.roles#destroyAll
+             * @methodOf lbServices.Photographer.roles
+             *
+             * @description
+             *
+             * Deletes all roles of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.roles.destroyAll = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::delete::Photographer::roles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Photographer.roles#destroyById
+             * @methodOf lbServices.Photographer.roles
+             *
+             * @description
+             *
+             * Delete a related item by id for roles.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             *  - `fk` – `{*}` - Foreign key for roles
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.roles.destroyById = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::destroyById::Photographer::roles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Photographer.roles#exists
+             * @methodOf lbServices.Photographer.roles
+             *
+             * @description
+             *
+             * Check the existence of roles relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             *  - `fk` – `{*}` - Foreign key for roles
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Role` object.)
+             * </em>
+             */
+        R.roles.exists = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::exists::Photographer::roles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Photographer.roles#findById
+             * @methodOf lbServices.Photographer.roles
+             *
+             * @description
+             *
+             * Find a related item by id for roles.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             *  - `fk` – `{*}` - Foreign key for roles
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Role` object.)
+             * </em>
+             */
+        R.roles.findById = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::findById::Photographer::roles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Photographer.roles#link
+             * @methodOf lbServices.Photographer.roles
+             *
+             * @description
+             *
+             * Add a related item by id for roles.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             *  - `fk` – `{*}` - Foreign key for roles
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Role` object.)
+             * </em>
+             */
+        R.roles.link = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::link::Photographer::roles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Photographer.roles#unlink
+             * @methodOf lbServices.Photographer.roles
+             *
+             * @description
+             *
+             * Remove the roles relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             *  - `fk` – `{*}` - Foreign key for roles
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.roles.unlink = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::unlink::Photographer::roles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Photographer.roles#updateById
+             * @methodOf lbServices.Photographer.roles
+             *
+             * @description
+             *
+             * Update a related item by id for roles.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - User id
+             *
+             *  - `fk` – `{*}` - Foreign key for roles
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Role` object.)
+             * </em>
+             */
+        R.roles.updateById = function() {
+          var TargetResource = $injector.get("Role");
+          var action = TargetResource["::updateById::Photographer::roles"];
           return action.apply(R, arguments);
         };
 

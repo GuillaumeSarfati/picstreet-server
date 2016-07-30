@@ -24,9 +24,6 @@ Photographer.create [
       
       console.log 'Create roles success' unless err
 
-      newRoles = []
-
-      
       async.waterfall [
 
         (done) ->

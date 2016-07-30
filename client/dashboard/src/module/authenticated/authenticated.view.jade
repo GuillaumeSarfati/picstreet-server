@@ -41,6 +41,7 @@ ion-side-menus#authenticated
 		ion-item(
 			ui-sref="authenticated.customers"
 			menu-close
+			ng-grant="['$administrator']"
 		)
 			.icon: i.custom-icon.custom-icon-business
 			.title Customers
@@ -48,6 +49,7 @@ ion-side-menus#authenticated
 		ion-item(
 			ui-sref="authenticated.albums"
 			menu-close
+			ng-grant="['$administrator', '$photographer']"
 		)
 			.icon: i.custom-icon.custom-icon-business
 			.title Albums
