@@ -36,6 +36,12 @@
       "type": "hasMany",
       "model": "Position",
       "foreignKey": "photographerId"
+    },
+    "roles": {
+      "type": "hasMany",
+      "model": "Role",
+      "foreignKey": "principalId",
+      "through": "RoleMapping"
     }
   },
   "acls": [
