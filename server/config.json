@@ -2,16 +2,7 @@
   "restApiRoot": "/api",
   "host": "0.0.0.0",
   "port": 3000,
-  "stripe": {
-    "test": {
-      "secretKey": "sk_test_aUV2kpEgrbZWEEClbsTazqUM",
-      "publishKey": "pk_test_cd9qs7aO7l2730zspzQJkAki"
-    },
-    "live": {
-      "secretKey": "sk_live_DCqUw9h7KJKlPZG9PUHnpun0",
-      "publishKey": "pk_live_ac59GWRNkJ8xly10NPoft8GW"
-    }
-  },
+  
   "remoting": {
     "context": {
       "enableHttpContext": true
