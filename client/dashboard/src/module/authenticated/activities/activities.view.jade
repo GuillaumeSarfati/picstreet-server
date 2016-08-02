@@ -1,0 +1,10 @@
+ion-view(title="Customers")#activities
+	.bar.bar-header
+		h1.title Activities
+
+	ion-content.activities-content
+
+		ion-item.activity(
+			ng-repeat="activity in activities"
+		) {{ activity.type }} {{ activity.photographerId }} {{ activity.creationDate | date: 'HH:mm:ss'}}
+

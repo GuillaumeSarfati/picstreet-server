@@ -95,5 +95,9 @@
   "LinkBetweenAlbumAndCustomer": {
     "dataSource": "mongoDb",
     "public": true
+  },
+  "Activity": {
+    "dataSource": "mongoDb",
+    "public": true
   }
 }
