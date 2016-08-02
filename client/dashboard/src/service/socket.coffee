@@ -9,12 +9,7 @@ angular.module 'picstreet'
 	userId = LoopBackAuth.currentUserId
 	
 	socket = io.connect __API_URL__
-	
-	socket.emit 'login', 
-		id: id
-		userId: userId
 
-	socket.on 'authenticated', (data) ->
-		#TODO		
+	
 
 	return socket

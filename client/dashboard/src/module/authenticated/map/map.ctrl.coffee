@@ -1,7 +1,7 @@
 angular.module "picstreet.map"
 
 .controller "mapCtrl", ($rootScope, $scope, $picstreet, photographers, monuments) ->
-	
+
 	$scope.position = {}
 	$scope.monument = {}
 	$scope.loadPicture = false

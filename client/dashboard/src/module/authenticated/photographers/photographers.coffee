@@ -11,7 +11,8 @@ angular.module "picstreet.photographers", []
 				templateUrl: 'photographers.view.html'
 				controller: 'photographersCtrl'
 		
-		grantedRoles: ['$manager']	
+		grantedRoles: ['$manager']
+		resolve: {}
 
 	return
 

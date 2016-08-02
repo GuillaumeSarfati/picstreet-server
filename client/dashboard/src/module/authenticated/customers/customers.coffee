@@ -10,7 +10,7 @@ angular.module "picstreet.customers", []
 			menuContent:
 				templateUrl: 'customers.view.html'
 				controller: 'customersCtrl'
-				
+		resolve: {}
 	return
 
 .run ->

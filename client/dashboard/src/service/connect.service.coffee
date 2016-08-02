@@ -1,6 +1,6 @@
 angular.module 'picstreet'
 
-.service '$connect', (LoopBackAuth, Photographer, $rootScope) ->
+.service '$connect', (LoopBackAuth, Photographer, Activity, $rootScope, $socket) ->
 		
 	$connect = 
 
@@ -31,16 +31,19 @@ angular.module 'picstreet'
 
 			.catch (err) -> callback false
 
-
 		logout: (callback)->
 
 			Photographer.logout()
-			callback()
+			callback() if callback
 			$rootScope.$emit '$unauthenticated'
+			window.location = '#/login'
 
 		remember: (callback=->) ->
 			
-			if window.localStorage.getItem '$LoopBack$accessTokenId'
+			if $rootScope.me
+				callback $rootScope.me
+
+			else if window.localStorage.getItem '$LoopBack$accessTokenId'
 				
 				Photographer.getCurrent 
 					filter:
@@ -50,10 +53,17 @@ angular.module 'picstreet'
 						]
 				.$promise
 				.then (me) ->
+					Activity.create
+						type: 'dashboard:connect'
+						photographerId: me.id
+					
+
 					$rootScope.me = me
 					$rootScope.$emit '$authenticated', me
-					callback me
-				.catch (err) -> callback false
+					callback $rootScope.me
+				.catch (err) ->
+					console.log err
+					callback false
 			else
 				callback false
 				

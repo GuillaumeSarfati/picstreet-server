@@ -18,7 +18,7 @@ angular.module "picstreet.map", ['leaflet-directive']
 			'$manager'
 		]
 
-		resolve: 
+		resolve:
 
 			photographers: (Photographer) ->
 				Photographer.find
