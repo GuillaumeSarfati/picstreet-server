@@ -1,6 +1,9 @@
-ion-view(title="PIXER")#login
+ion-view(title="Dashboard")#login
 	ion-content 
-
+		
+		.logo
+			img(src="img/svg/favicon.svg")
+		.title PicStreet Dashboard
 		label.item.item-input
 			span.input-label Email
 			input(
@@ -18,7 +21,3 @@ ion-view(title="PIXER")#login
 		button.button.button-block.login(
 			ng-click="login(me)"
 		) Login
-
-		button.button.button-block.signup(
-			ng-click="signup()"
-		) Signup

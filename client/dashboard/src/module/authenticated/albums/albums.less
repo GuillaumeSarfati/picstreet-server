@@ -1,44 +1,135 @@
 #albums {
-	
-	display:flex;
-	flex-direction: row;
-	flex-wrap:wrap;
-	justify-content:center;
-	.album {
-		background-size: cover !important;
-		background-repeat: no-repeat !important;
+	.informations {
+		* { font-family: "Lucida Grande";}
+		background: #f7f5f5;
+		padding: 20px;
 
-		transition: all .3s ease;
-		position:relative;
-
-		margin-top: 3vw;
-		margin-left: 3vw;
-		width: 20vw;
-		height: 20vw;
-		border: 1px solid #eee;
-
-		.name {
-			.text-center;
-
-			transition: all .3s ease;
-			position:absolute;
-			background: rgba(0,0,0,0.7);
-			color:white;
-			width: 20vw;
-			height: 50px;
-			display:flex;
-			flex-direction: column;
-			justify-content:center;
-			bottom: 0;
+		.icon {}
+		.description {
+			.title {
+				.text-uppercase;
+				color:black;
+			}
+			.text {
+				color: #92929D;
+			}
 		}
 	}
-	.album:hover {
+	.albums-period {
+		padding: 20px;
+		padding-bottom: 70px;		
+		margin-bottom: 70px;
+		border-bottom: 1px solid #f7f5f5;
+		.title {
+			padding-bottom: 0px;
+			font-size: 16px;
+			font-family: "Open Sans",Arial,sans-serif;
+			font-weight:400;
 
-		transform: scale(1.1);
-		cursor:pointer;
-
+		}
+		.subtitle {
+			padding-bottom: 20px;
+			// border: 1px solid red;
+			display:flex;
+			.stat {
+				display:flex;
+				padding-right: 10px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				color: #92929D;
+				font-weight: 500;
+				font-family: "Open Sans",Arial,sans-serif;
+				// border: 1px solid green;
+				.name {
+					.text-center;
+					// font-size: 2em;
+				}
+			}
+		}
 	}
-	.album:hover .name {
-		height: 100%;
+	.albums {
+		display:flex;
+		flex-wrap:wrap;
+		justify-content: flex-start;
+		.album {
+			transition: all .3s ease;
+			width: 182px;
+			margin-right: 20px;
+			margin-bottom: 20px;
+			
+			.cover {
+				width:182px;
+				height:182px;
+				border-radius: 4px;
+				background-size:cover;
+				background-position:center;
+
+			}
+			.album-column {
+				display:inline;
+			}
+			.name {
+				.text-uppercase;
+				display:block;
+			}
+			.infos {
+				width: 100px;
+				color: #92929D;
+				font-weight: 500;
+				font-family: "Open Sans",Arial,sans-serif;
+			}
+			.actions {
+				
+			}
+
+		}
+		.album:hover {
+			cursor:pointer;
+			transform: scale(1.1);
+		}
 	}
 }
+// #albums {
+	
+// 	display:flex;
+// 	flex-direction: row;
+// 	flex-wrap:wrap;
+// 	justify-content:center;
+// 	.album {
+// 		background-size: cover !important;
+// 		background-repeat: no-repeat !important;
+
+// 		transition: all .3s ease;
+// 		position:relative;
+
+// 		margin-top: 3vw;
+// 		margin-left: 3vw;
+// 		width: 20vw;
+// 		height: 20vw;
+// 		border: 1px solid #eee;
+
+// 		.name {
+// 			.text-center;
+
+// 			transition: all .3s ease;
+// 			position:absolute;
+// 			background: rgba(0,0,0,0.7);
+// 			color:white;
+// 			width: 20vw;
+// 			height: 50px;
+// 			display:flex;
+// 			flex-direction: column;
+// 			justify-content:center;
+// 			bottom: 0;
+// 		}
+// 	}
+// 	.album:hover {
+
+// 		transform: scale(1.1);
+// 		cursor:pointer;
+
+// 	}
+// 	.album:hover .name {
+// 		height: 100%;
+// 	}
+// }

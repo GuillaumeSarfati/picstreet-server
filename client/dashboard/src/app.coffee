@@ -23,6 +23,7 @@ angular.module 'picstreet', [
 	'ionic-native-transitions'
 
 	'lbServices'
+	'ui.bootstrap'
 	'ngPicstreet'
 
 	'ngIOS9UIWebViewPatch'

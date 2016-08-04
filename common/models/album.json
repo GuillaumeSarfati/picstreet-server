@@ -13,6 +13,10 @@
     "date": {
       "type": "date",
       "default": "$now"
+    },
+    "status": {
+      "type": "string",
+      "default": "waiting"
     }
   },
   "validations": [],
@@ -29,6 +33,21 @@
       "through": "LinkBetweenAlbumAndCustomer"
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY",
+      "property": "submitToCustomer"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$administrator",
+      "permission": "ALLOW",
+      "property": "submitToCustomer"
+    }
+  ],
   "methods": {}
 }

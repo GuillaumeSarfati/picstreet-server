@@ -2,60 +2,63 @@
 ion-side-menus#authenticated
 
 	ion-side-menu-content(drag-content="false")
+		header
+			.header-name Picstreet
+			.header-content
+				.header-content-item.role(ng-grant="['$administrator']") administrator
+				.header-content-item.role(ng-grant="['$manager']") manager
+				.header-content-item.role(ng-grant="['$photographer']") photographer
+				.header-content-icon.ion-ios-bell-outline
+				.header-content-icon.ion-ios-gear-outline
+				.header-content-item(ng-click="logout()") logout
+		main
+			menu
+				
+				ion-item(
+					ui-sref="authenticated.reviews"
+					ng-grant="['$administrator']"
+				)
+					.icon: i.custom-icon.custom-icon-business
+					.title Reviews
 
-		ion-nav-view(name="menuContent" animation="no-animation")
+				ion-item(
+					ui-sref="authenticated.map"
+				)
+					.icon: i.custom-icon.custom-icon-business
+					.title Map
 
-	ion-side-menu(side="left")
+				ion-item(
+					ui-sref="authenticated.activities"
+				)
+					.icon: i.custom-icon.custom-icon-business
+					.title Activities
+				
+				ion-item(
+					ui-sref="authenticated.photographers"
+					ng-grant="['$administrator', '$manager']"
+				)
+					.icon: i.custom-icon.custom-icon-business
+					.title Photographers
 
-		ion-item(
-			menu-close
-			ui-sref="authenticated.map"
-		)
-			.icon: i.custom-icon.custom-icon-business
-			.title Map
+				ion-item(
+					ui-sref="authenticated.customers"
+					ng-grant="['$administrator']"
+				)
+					.icon: i.custom-icon.custom-icon-business
+					.title Customers
 
-		ion-item(
-			menu-close
-			ui-sref="authenticated.activities"
-		)
-			.icon: i.custom-icon.custom-icon-business
-			.title Activities
-		
-		ion-item(
-			ui-sref="authenticated.photographers"
-			menu-close
-		)
-			.icon: i.custom-icon.custom-icon-business
-			.title Photographers
+				ion-item(
+					ui-sref="authenticated.albums"
+					ng-grant="['$administrator', '$photographer']"
+				)
+					.icon: i.custom-icon.custom-icon-business
+					.title Albums
 
-		ion-item(
-			ui-sref="authenticated.customers"
-			menu-close
-			ng-grant="['$administrator']"
-		)
-			.icon: i.custom-icon.custom-icon-business
-			.title Customers
+				
 
-		ion-item(
-			ui-sref="authenticated.albums"
-			menu-close
-			ng-grant="['$administrator', '$photographer']"
-		)
-			.icon: i.custom-icon.custom-icon-business
-			.title Albums
+				
+				
+			.main-content(
+				ui-view="menuContent"
+			)
 
-		//- ion-item(
-		//- 	menu-close
-		//- 	ng-click="openModalMyPictures()"
-		//- )
-		//- 	.icon: i.custom-icon.custom-icon-business
-		//- 	.title My Pictures
-
-		ion-item(
-			menu-close
-			ng-click="logout()"
-		)
-			.icon: i.custom-icon.custom-icon-business
-			.title Logout
-
-		

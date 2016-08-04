@@ -35,15 +35,15 @@ angular.module 'picstreet'
 	template: '<ion-spinner></ion-spinner>'
 	hideOnStateChange: true
 
-.factory 'loader', ($rootScope) ->
+.factory 'loader', ($rootScope, $q) ->
 
 	request: (config) ->
 		unless config.url.match /// /api/Activities ///
 			$rootScope.$broadcast('loading:show')
 		return config
 	response: (response) -> $rootScope.$broadcast('loading:hide'); return response
-	requestError: (err) -> $rootScope.$broadcast('loading:hide'); return err
-	responseError: (err) -> $rootScope.$broadcast('loading:hide'); return err
+	requestError: (err) -> $rootScope.$broadcast('loading:hide'); return $q.reject err
+	responseError: (err) -> $rootScope.$broadcast('loading:hide'); return $q.reject err
  
 .run ($rootScope, $ionicLoading) ->
 

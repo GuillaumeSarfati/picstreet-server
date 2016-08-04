@@ -1,13 +1,50 @@
 ion-view(title="Albums")
 		
-	ion-content
+	ion-content#albums
+		.informations
+			.icon
+			.description
+				.title title
+				.text hqjhdbq dhjqbs jd qhjs dhq sjd qhjs djj nqdkjn qskdj nj qs ndkjn qskj dnqk sjnd j kqnd
+		.albums-period(ng-repeat="(date, content) in dates")
+			.title(ng-if="date == today") Aujourd'hui
+			.title(ng-if="date == yesterday") Hier
+			.title(ng-if="date != today && date != yesterday") {{date}}
+			.subtitle
+				.stat
+					.name {{content.pictures}}&nbsp;
+					.value photos
+				.stat
+					.name {{content.purchase}}
+					.value € achetés
+				.stat
+					.name {{content.potentiel}}
+					.value € potentiel
+			.albums
+				.album(
+					ng-repeat="album in content.albums"
+					
+				) 
+					.cover(
+						ui-sref="authenticated.album({id: album.id})"
+						style="background-image: url('http://localhost:3000/api/Buckets/ppxpicturesresized/download/resized-{{album.pictures[0].name}}')")
 
-		#albums
-
-			.album(
-				ng-repeat="album in albums"
-				ui-sref="authenticated.album({id: album.id})"
-				style="background-image: url('http://localhost:3000/api/Buckets/ppxpicturesresized/download/resized-{{album.pictures[0].name}}')"
-			) 
-				.name {{ album.name }}
-				.price {{ album.purchase }}
+					.album-column.name {{ album.name }}
+					.album-column.infos {{ album.pictures.length }} photos - {{album.potentiel}} euros
+					.album-column
+						.actions
+							//- span(
+							//- 	uib-dropdown
+							//- )
+							//- 	a(uib-dropdown-toggle) 
+							//- 		i.ion-ios-gear-outline
+							//- 		span settings
+							//- 	ul.dropdown-menu(uib-dropdown-menu)
+							//- 		li: a link1
+							//- 		li: a link2
+							//- 		li: a link3
+									
+							button(
+								ng-click="deleteAlbum(album)"
+								ng-grant="['$administrator']"
+							) Delete

@@ -28,7 +28,8 @@
     "leaflet": "~0.7.7",
     "angular-dropzone": "~0.1.2",
     "dropzone": "~4.3.0",
-    "ng-picstreet": "https://github.com/GuillaumeSarfati/ng-picstreet.git"
+    "ng-picstreet": "https://github.com/GuillaumeSarfati/ng-picstreet.git",
+    "angular-bootstrap": "~2.0.1"
   },
   "resolutions": {
     "angular": "1.5.3",

@@ -9,20 +9,67 @@ angular.module 'picstreet.directives', []
 			return false
 
 
-.directive 'ngGrant', ($rootScope, $parse, $grant) ->
-	priority:999
-	restrict: 'A'
+# .directive 'ngGrant', ($rootScope, $parse, $grant) ->
+# 	priority:999
+# 	restrict: 'A'
 	
-	link: ($scope, $element, $attr) ->
-		$element[0].style.display = 'none'
+# 	link: ($scope, $element, $attr) ->
+# 		$element[0].style.display = 'none'
 
-		$rootScope.$watch 'me', (me)->
+# 		$rootScope.$watch 'me', (me)->
 			
 			grantedRoles = $parse($attr.ngGrant)($scope)
 			userRoles = me.roles
 
 			if $grant.isGranted userRoles, grantedRoles
 				$element[0].style.display = 'block'
+
+
+.directive 'ngGrant',($rootScope, $parse, $animate, $compile, $grant) ->
+	multiElement: true,
+	transclude: 'element',
+	priority: 600,
+	terminal: true,
+	restrict: 'A',
+	$$tlb: true,
+	link: ($scope, $element, $attr, ctrl, $transclude) ->
+				
+		$rootScope.$watch 'me', (me)->
+
+			grantedRoles = $parse($attr.ngGrant)($scope)
+			userRoles = me.roles
+
+			if $grant.isGranted userRoles, grantedRoles
+				unless childScope
+					$transclude (clone, newScope) ->
+						childScope = newScope;
+						clone[clone.length++] = $compile.$$createComment('end ngGrant', $attr.ngGrant)
+
+						block = clone: clone
+						$animate.enter(clone, $element.parent(), $element)
+
+			else 
+				if previousElements
+					previousElements.remove()
+					previousElements = null
+				
+				if childScope
+					childScope.$destroy()
+					childScope = null
+
+				if block
+					previousElements = getBlockNodes block.clone
+					
+					$animate.leave previousElements
+					.then ->
+						previousElements = null
+				 
+					block = null
+
+
+
+
+
 
 .run ($state) ->
 

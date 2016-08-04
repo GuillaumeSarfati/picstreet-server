@@ -6,7 +6,18 @@ angular.module "picstreet.album"
 	$scope.newPictures = {}
 	console.log $scope.album = album
 	
-	
+	$scope.submitToReview = (album) ->
+		Album.submitToReview id: album.id
+		.$promise
+		.then (success) -> console.log 'success : ', success
+		.catch (err) -> console.log 'err : ', err
+
+	$scope.submitToCustomer = (album) ->
+		Album.submitToCustomer id: album.id
+		.$promise
+		.then (success) -> console.log 'success : ', success
+		.catch (err) -> console.log 'err : ', err
+
 	$scope.updateAlbum = (album) ->
 		Album.upsert album
 		.$promise

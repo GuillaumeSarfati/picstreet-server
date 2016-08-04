@@ -3,7 +3,7 @@ angular.module "picstreet.login"
 .controller "loginCtrl", ($scope, $state, $connect)->
 
 	$scope.me = 
-		email: 'manager@picstreet.io'
+		email: 'photographer@picstreet.io'
 		password: 'azerty'
 
 	$scope.login = (me) ->

@@ -33,7 +33,3 @@ gulp.task 'watch', ['build'], ->
   gulp.watch "./#{config.client.path.src}/**/*.coffee", ['coffeescript']
   gulp.watch "./#{config.client.path.src}/**/*.less", ['less']
   gulp.watch "./#{config.client.path.src}/**/*.jade", ['jade']
-  gulp.watch "./#{config.client.path.src}/**/*.js", ['js']
-  gulp.watch "./#{config.client.path.src}/i18n/*.json", ['i18n']
-  gulp.watch "./#{config.client.path.src}/img/**", ['img']
-  gulp.watch "./#{config.client.path.src}/static/**", ['static']

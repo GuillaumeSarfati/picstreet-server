@@ -5,10 +5,12 @@ html
 		meta(name='viewport', content='initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width')
 		meta(name="format-detection" content="telephone=no")
 		//- meta(http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'")
-		title PicStreet DASHBOARD
+		title Dashboard
 		link(href='css/app.css', rel='stylesheet')
 		link(href='lib/ionic/css/ionic.css', rel='stylesheet')
-
+		//- link(rel="icon" type="image/png" sizes="any" href="img/svg/favicon.svg")
+		link(href='https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet')
+	
 	body(ng-app='picstreet' id="fb-root")
 
 
@@ -23,7 +25,6 @@ html
 
 	script(src='js/vendors.js')
 	script(src='https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js')
-	link(href='https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet')
 	script(src='js/api.js')
 	script(src='js/app.js')
 	script(src='js/templates.js')

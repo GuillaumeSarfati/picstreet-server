@@ -1,9 +1,9 @@
-ion-view(title="PIXER")
-	#map
-	.picstreet-menu(menu-toggle="left")
-		i.ion-navicon
+ion-view(title="Dashboard").map-view
+	#map(ng-class="")
+	//- .picstreet-menu(menu-toggle="left")
+	//- 	i.ion-navicon
 	
-	.create-map-content
+	.create-map-content(ng-grant="['$administrator']")
 		
 		.create-menu
 			.create-menu-link(

@@ -1,47 +1,63 @@
 #album {
-	display:flex;
-	flex-direction:column;
-	justify-content:start;
-
-	// border: 3px solid red;
-	
-	.dropzone {
-		// border: 1px solid blue;
-		.make-xs-column(12);
+	ion-scroll {
+		height: 300px;
 	}
-	.album {
-		// border: 1px solid red;
-		display:flex;
-		flex-direction:row;
-		flex-wrap: wrap;
-		justify-content:center;
-
-		.picture {
-			position:relative;
-
-			margin-left: 5vw;
-			margin-top: 5vw;
-
-			display:flex;
-			justify-content:center;
-			flex-direction: column;
-
-			.price {
-				position:absolute;
-				
-				background: black;
-				&.purchase {
-					background: @blue;
-				}
-				color:white;
-
-				padding: 5px 10px;
-				border-radius: 15px;
-
-				top: -15px;
-				right: -15px;
-
-			}
+	.pictures {
+		width: 1000000px;
+		height: 100%;
+	}
+	.picture {
+		float:left;
+		height: 100%;
+		img {
+			height: 300px;
 		}
 	}
 }
+// #album {
+// 	display:flex;
+// 	flex-direction:column;
+// 	justify-content:start;
+
+// 	// border: 3px solid red;
+	
+// 	.dropzone {
+// 		// border: 1px solid blue;
+// 		.make-xs-column(12);
+// 	}
+// 	.album {
+// 		// border: 1px solid red;
+// 		display:flex;
+// 		flex-direction:row;
+// 		flex-wrap: wrap;
+// 		justify-content:center;
+
+// 		.picture {
+// 			position:relative;
+
+// 			margin-left: 5vw;
+// 			margin-top: 5vw;
+
+// 			display:flex;
+// 			justify-content:center;
+// 			flex-direction: column;
+
+// 			.price {
+// 				position:absolute;
+				
+// 				background: black;
+// 				&.purchase {
+// 					background: @blue;
+// 				}
+// 				color:white;
+
+// 				padding: 5px 10px;
+// 				border-radius: 15px;
+
+// 				top: -15px;
+// 				right: -15px;
+
+// 			}
+// 		}
+// 	}
+// }
