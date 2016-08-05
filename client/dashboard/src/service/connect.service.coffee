@@ -6,13 +6,14 @@ angular.module 'picstreet'
 
 		signup: (me, opts={}, callback) ->
 
+			console.log 'signup : ', me
 			Photographer.create me
 			.$promise
 			.then callback
-			.catch (err) -> console.log 'err : ', err
+			.catch (err) -> console.log 'err signup: ', err
 
 		login: (opts={}, callback=->) ->
-
+			console.log 'login : ', opts
 			Photographer.login
 
 				email: opts.email
@@ -29,17 +30,21 @@ angular.module 'picstreet'
 				callback accessToken
 				
 
-			.catch (err) -> callback false
+			.catch (err) -> 
+				console.log 'err login : ', err
+				callback false
 
 		logout: (callback)->
 
 			Photographer.logout()
 			callback() if callback
+			$rootScope.me = undefined
 			$rootScope.$emit '$unauthenticated'
 			window.location = '#/login'
 
 		remember: (callback=->) ->
 			
+			console.log 'remember'
 			if $rootScope.me
 				callback $rootScope.me
 
@@ -49,7 +54,9 @@ angular.module 'picstreet'
 					filter:
 						include: [
 							'roles'
+							'photographers'
 							'albums'
+							'picturePurchases'
 						]
 				.$promise
 				.then (me) ->
@@ -57,12 +64,12 @@ angular.module 'picstreet'
 						type: 'dashboard:connect'
 						photographerId: me.id
 					
-
 					$rootScope.me = me
 					$rootScope.$emit '$authenticated', me
+
 					callback $rootScope.me
 				.catch (err) ->
-					console.log err
+					console.log 'err remember : ', err
 					callback false
 			else
 				callback false

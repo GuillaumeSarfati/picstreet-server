@@ -11,7 +11,13 @@ angular.module "picstreet.activities", []
 				templateUrl: 'activities.view.html'
 				controller: 'activitiesCtrl'
 		
-		grantedRoles: ['$administrator']
+		grantedRoles: [
+			'$master'
+			'$administrator'
+			'$manager'
+			'$photographer'
+			'$new'
+		]
 
 		resolve: {}
 	return

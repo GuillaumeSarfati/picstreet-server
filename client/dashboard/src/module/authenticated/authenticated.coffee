@@ -8,7 +8,11 @@ angular.module 'picstreet.authenticated', [
 	'picstreet.customers'
 	'picstreet.customer'
 
+	'picstreet.sponsorship'
+
 	'picstreet.photographers'
+	'picstreet.photographer'
+
 	'picstreet.albums'
 	'picstreet.album'
 	
@@ -22,6 +26,3 @@ angular.module 'picstreet.authenticated', [
 		abstract: true
 		templateUrl: 'authenticated.view.html'
 		controller: "authenticatedCtrl"
-
-
-

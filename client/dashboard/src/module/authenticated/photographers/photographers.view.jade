@@ -1,11 +1,8 @@
 ion-view(title="Photographers")#photographers
-	.bar.bar-header
-		h1.title Photographers
-		button.button.button-clear(
-			ng-click="modal.hide()"
-		) {{'close' | translate}}
 
-		
 	ion-content.photographers-content
 
-		section.photographer(ng-repeat="photographer in photographers") {{ photographer.email }}
+		section.photographer(
+			ng-repeat="photographer in photographers"
+			ui-sref="authenticated.photographer({id:photographer.id})"
+		) {{ photographer.email }}

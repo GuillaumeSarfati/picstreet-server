@@ -11,7 +11,10 @@ html
 		//- link(rel="icon" type="image/png" sizes="any" href="img/svg/favicon.svg")
 		link(href='https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet')
 	
-	body(ng-app='picstreet' id="fb-root")
+	body(
+		ng-app='picstreet'
+		ng-animate-children="true"
+	)
 
 
 		ion-notification(menu-close)

@@ -11,26 +11,28 @@ angular.module "picstreet.albums", []
 				templateUrl: 'albums.view.html'
 				controller: 'albumsCtrl'
 
-		resolve:
+		grantedRoles: ['$master', '$administrator', '$manager', '$photographer']
+		resolve: {}
 
-			albums: ($rootScope, Album) ->
-				filter = 
-					include: [
-						{relation: 'pictures'}
-					]
-					order: 'date DESC'
-				# if $grant.isGranted $rootScope.me.roles, ['$administrator'] 
-				# 	filter.where = {}
+			# albums: ($rootScope, Album) ->
+			# 	filter = 
+			# 		include: [
+			# 			{relation: 'pictures'}
+			# 		]
+			# 		order: 'date DESC'
+
+			# 	if $grant.isGranted $rootScope.me.roles, ['$administrator'] 
+			# 		filter.where = {}
 				
-				# else if $grant.isGranted $rootScope.me.roles, ['$manager']
-				# 	filter.where = photographerId: inq: $rootScope.me.photographers.map (photographers) -> photographer.id 
+			# 	else if $grant.isGranted $rootScope.me.roles, ['$manager']
+			# 		filter.where = photographerId: inq: $rootScope.me.photographers.map (photographers) -> photographer.id 
 				
-				# else if $grant.isGranted $rootScope.me.roles, ['$photographer']
-				# 	filter.where = photographerId: $rootScope.me.id
+			# 	else if $grant.isGranted $rootScope.me.roles, ['$photographer']
+			# 		filter.where = photographerId: $rootScope.me.id
 				
-				return Album.find 
-					filter: filter
-				.$promise
+			# 	return Album.find 
+			# 		filter: filter
+			# 	.$promise
 
 	.state 'authenticated.reviews',
 		url: '/reviews'

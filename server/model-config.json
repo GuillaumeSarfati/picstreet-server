@@ -99,5 +99,13 @@
   "Activity": {
     "dataSource": "mongoDb",
     "public": true
+  },
+  "Charge": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "PicturePurchase": {
+    "dataSource": "mongoDb",
+    "public": true
   }
 }

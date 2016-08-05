@@ -60,6 +60,16 @@
       "type": "hasMany",
       "model": "Position",
       "foreignKey": "customerId"
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "customerId"
+    },
+    "picturePurchases": {
+      "type": "hasMany",
+      "model": "PicturePurchase",
+      "foreignKey": "customerId"
     }
   },
   "acls": [

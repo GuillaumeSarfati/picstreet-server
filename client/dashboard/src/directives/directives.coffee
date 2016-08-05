@@ -3,20 +3,11 @@ angular.module 'picstreet.directives', []
 .service '$grant', ->
 	return $grant = 
 		isGranted: (userRoles, grantedRoles) ->
+			
 			if userRoles
 				for role in userRoles
 					return true if role.name in grantedRoles
 			return false
-
-
-# .directive 'ngGrant', ($rootScope, $parse, $grant) ->
-# 	priority:999
-# 	restrict: 'A'
-	
-# 	link: ($scope, $element, $attr) ->
-# 		$element[0].style.display = 'none'
-
-# 		$rootScope.$watch 'me', (me)->
 			
 			grantedRoles = $parse($attr.ngGrant)($scope)
 			userRoles = me.roles
@@ -70,20 +61,24 @@ angular.module 'picstreet.directives', []
 
 
 
-
+.config ($provide, $stateProvider) ->
+	$provide.decorator '$state', ($delegate, $rootScope) ->
+		$rootScope.$on '$stateChangeStart', (event, state, params) ->
+			$delegate.grantedRoles = state.grantedRoles
+		$delegate
+			
 .run ($state) ->
 
 	for state in $state.get()
+		
 		if state.name.match ///authenticated.///
 
 			state.resolve = {} unless state.resolve
-			
 			state.resolve.me = ($state, $location, $connect, $grant, $q) ->
-
 				$connect.remember (me) ->
-
-					if $state.grantedRoles is undefined or $grant.isGranted me.roles, state.grantedRoles
-						console.log 'authorized', me
+					console.info '[ ME ]', me
+					if $state.grantedRoles is undefined or $grant.isGranted me.roles, $state.grantedRoles
+						console.log 'authorized'
 						return $q.resolve(me)
 
 					else

@@ -3,19 +3,20 @@ angular.module 'picstreet'
 .factory 'auth', ($q, $location, LoopBackAuth) ->
 	return loader =
 		request: (request) ->
-			LoopBackAuth
-			if $location.$$path is '/login' and (LoopBackAuth.accessTokenId is null or LoopBackAuth.currentUserId is null)
+			if $location.$$path in ['/login', '/signup'] and (LoopBackAuth.accessTokenId is null or LoopBackAuth.currentUserId is null)
 				return request
 
 			else if LoopBackAuth.accessTokenId is null or LoopBackAuth.currentUserId is null 
 				$location.path('/login')
-				return $q.reject(request)
+				return request
 
 			else 
 				return request
 
 		response: (response) ->
 			return response
+		requestError: (err) ->
+			return $q.reject(err)
 		responseError: (rejection) ->
 	
 			if rejection.status is 401

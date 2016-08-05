@@ -11,6 +11,16 @@ ion-view(title="{{album.name}}")
 			scrollbar-x="false"
 		)
 			.pictures
+				.picture
+					form.dropzone#dropzone(
+						ng-if="dropzone"
+						method="post"
+						enctype="multipart/form-data"
+						ng-dropzone
+						dropzone="dropzone"
+						dropzone-config="dropzoneConfig"
+						event-handlers="dropzoneEvents"
+					)
 				.picture(
 					ng-repeat="picture in album.pictures track by $index"
 

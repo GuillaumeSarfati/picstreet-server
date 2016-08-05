@@ -40,41 +40,43 @@ angular.module "picstreet.map"
 			$picstreet.deleteMonumentInBdd monument
 			$scope.monument = {}
 
-	$scope.center = $picstreet.center
-	
-	$scope.monuments = monuments
-	$scope.photographers = photographers
-
-	console.info '[ PHOTOGRAPHERS ]', photographers
-	console.info '[ MONUMENTS ]', monuments
-
-	$scope.$on 'monument:click', (e, monument) ->
-		$picstreet.center monument
-		$scope.monument = monument
-
-	$picstreet.init 'pk.eyJ1IjoicGl4ZXI0MiIsImEiOiJjaW91cDRqaGUwMDQ5dnRramp6cGkwMWh0In0.OpoxVVl38hLmP9XG2lk26w'
-	
-	$picstreet.map = $picstreet.createMap
-		center: 
-			lat: 48.8534100
-			lng: 2.3488000
-		zoom: 11
-
-	$picstreet.map.on 'click', (e) ->
+	setTimeout ->
+		$scope.center = $picstreet.center
 		
-		if $scope.content is 'monument'
-			$scope.monument.lat = e.lngLat.lat
-			$scope.monument.lng = e.lngLat.lng
-			$scope.$apply() unless $scope.$$phase
+		$scope.monuments = monuments
+		$scope.photographers = photographers
 
-	$picstreet.createPhotographers photographers
-	$picstreet.createMonuments monuments
+		console.info '[ PHOTOGRAPHERS ]', photographers
+		console.info '[ MONUMENTS ]', monuments
+
+		$scope.$on 'monument:click', (e, monument) ->
+			$picstreet.center monument
+			$scope.monument = monument
+
+		$picstreet.init 'pk.eyJ1IjoicGl4ZXI0MiIsImEiOiJjaW91cDRqaGUwMDQ5dnRramp6cGkwMWh0In0.OpoxVVl38hLmP9XG2lk26w'
 		
-	$rootScope.$on 'photographer:position:update', (e, position) ->
+		$picstreet.map = $picstreet.createMap
+			center: 
+				lat: 48.8534100
+				lng: 2.3488000
+			zoom: 11
 
-		$picstreet.updatePhotographerPosition
-			photographerId: position.photographerId
-			position: position
+		$picstreet.map.on 'click', (e) ->
+			
+			if $scope.content is 'monument'
+				$scope.monument.lat = e.lngLat.lat
+				$scope.monument.lng = e.lngLat.lng
+				$scope.$apply() unless $scope.$$phase
 
+		$picstreet.createPhotographers photographers
+		$picstreet.createMonuments monuments
+			
+		$rootScope.$on 'photographer:position:update', (e, position) ->
+
+			$picstreet.updatePhotographerPosition
+				photographerId: position.photographerId
+				position: position
+
+	, 50
 	return
 		

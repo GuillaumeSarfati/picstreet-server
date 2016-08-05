@@ -23,6 +23,16 @@
   },
   "validations": [],
   "relations": {
+    "photographer": {
+      "type": "belongsTo",
+      "model": "Photographer",
+      "foreignKey": "photographerId"
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "customerId"
+    },
     "promotionCode": {
       "type": "hasOne",
       "model": "PromotionCode",
@@ -32,6 +42,16 @@
       "type": "hasOne",
       "model": "CreditCard",
       "foreignKey": "creditCardId"
+    },
+    "charge": {
+      "type": "hasOne",
+      "model": "Charge",
+      "foreignKey": "purchaseId"
+    },
+    "picturePurchases": {
+      "type": "hasMany",
+      "model": "PicturePurchase",
+      "foreignKey": "purchaseId"
     }
   },
   "acls": [],

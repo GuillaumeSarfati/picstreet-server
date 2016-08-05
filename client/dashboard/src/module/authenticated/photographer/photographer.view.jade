@@ -1,0 +1,20 @@
+ion-view(title="Photographers")#photographer
+	
+	ion-content 
+		.name {{ photographer.firstname }}
+
+		.manager(ng-if="photographer.manager")
+			.manager-id {{photographer.managerId}}
+			.manager-name
+				span {{photographer.manager.firstname}} 
+				span {{photographer.manager.lastname}}
+
+		.manager(ng-if="!photographer.manager")
+			.manager-id
+				input(ng-model="photographer.managerId")
+			.action
+				button(ng-click="updatePhotographer(photographer)")
+
+	
+
+		

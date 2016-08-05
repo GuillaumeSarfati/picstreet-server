@@ -5,10 +5,15 @@ module.exports = (Purchase) ->
 	Purchase.afterRemote 'create', (ctx, instance, next) ->
 
 		Customer = Purchase.app.models.Customer
+		
 		CreditCard = Purchase.app.models.CreditCard
+		Charge = Purchase.app.models.Charge
+
 		Picture = Purchase.app.models.Picture
-		UsedPromotionCode = Purchase.app.models.UsedPromotionCode
+		PicturePurchase = Purchase.app.models.PicturePurchase
+		
 		PromotionCode = Purchase.app.models.PromotionCode
+		UsedPromotionCode = Purchase.app.models.UsedPromotionCode
 
 		async.waterfall [
 			(done) ->
@@ -83,44 +88,41 @@ module.exports = (Purchase) ->
 					card: creditCard.stripeId
 					capture: false
 				, done
-		]
-		, (err, charge) ->
 
-			if charge
-				instance.charge = charge
-				instance.status = charge.status
+			(charge, done) ->
+				charge.purchaseId = instance.id
 
-				if instance.status is 'succeeded'
-					
-					async.waterfall [
-						(done) ->
-							if instance.promotionCodeId
+				Charge.create charge
+				, done
 
-								UsedPromotionCode.create
-									promotionCodeId: instance.promotionCodeId
-									customerId: instance.customerId
-								, done
+			(charge, done) ->
 
-							else
-								done null, undefined
+				if charge.status is 'succeeded'
+					if instance.promotionCodeId
 
-						(usedPromotionCode, done) ->
-							
-							Picture.updateAll
-								id: inq: instance.pictures.map (picture) -> picture.id
-							, purchase: true
-							, done
+						UsedPromotionCode.create
+							promotionCodeId: instance.promotionCodeId
+							customerId: instance.customerId
+						, done
 
-					], (err, pictures) ->
-						instance.save next
+					else
+						done null, undefined
 
-				else
-					instance.save next
-			else 
-				instance.err = err
-				instance.save (error, instance) ->
-					next err
+			(usedPromotionCode, done) ->
+				PicturePurchase.create instance.pictures.map (picture) ->
+					photographerId: picture.photographerId
+					customerId: instance.customerId
+					purchaseId: instance.id
+					pictureId: picture.id
+					price: picture.price
+				, done
 
+				# Picture.updateAll
+				# 	id: inq: instance.pictures.map (picture) -> picture.id
+				# , purchase: true
+				# , done
 
-
-
+		], (err, results) ->
+			return next err if err
+			return instance.save next
+			

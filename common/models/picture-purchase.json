@@ -1,24 +1,11 @@
 {
-  "name": "Picture",
+  "name": "PicturePurchase",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
-  "properties": {
-    "name": {
-      "type": "string",
-      "required": true
-    },
-    "purchase": {
-      "type": "boolean",
-      "default": false
-    },
-    "price": {
-      "type": "number",
-      "default": 6
-    }
-  },
+  "properties": {},
   "validations": [],
   "relations": {
     "photographer": {
@@ -26,10 +13,15 @@
       "model": "Photographer",
       "foreignKey": "photographerId"
     },
-    "picturePurchase": {
-      "type": "hasOne",
-      "model": "PicturePurchase",
+    "picture": {
+      "type": "belongsTo",
+      "model": "Picture",
       "foreignKey": "pictureId"
+    },
+    "purchase": {
+      "type": "belongsTo",
+      "model": "Purchase",
+      "foreignKey": "purchaseId"
     }
   },
   "acls": [],

@@ -1,0 +1,57 @@
+#activities {
+
+	.statistiques {
+		border-bottom: 1px solid #f1f1f1;
+		height: 40vh;
+		
+		display:flex;
+		justify-content:center;
+		flex-direction:column;
+		.gains {
+			.text-center;
+			font-size: 8em;
+		}
+	}	
+
+	.activity {
+		&.ng-enter {
+			.fadeInUp;
+		}
+		&.ng-enter-stagger {
+			animation-delay:1s;
+			animation-duration:0;
+		}
+		.animated;
+		border: 1px solid #f1f1f1;
+		margin: 10px;
+		padding: 10px;
+		display:flex;
+		.avatar {
+			display:flex;
+			justify-content:center;
+			flex-direction:column;
+			img {
+				width: 50px;
+			}
+		}
+		.content {
+			padding-left: 15px;
+			padding-right: 15px;
+			display:flex;
+			justify-content:center;
+			flex-direction:column;
+			flex:100;
+		}
+		.date {
+			display:flex;
+			justify-content:center;
+			flex-direction:column;
+			span {
+				background: @blue;
+				color:white;
+				padding: 10px;
+				border-radius:4px;
+			}
+		}
+	}
+}

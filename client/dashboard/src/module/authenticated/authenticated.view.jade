@@ -5,6 +5,7 @@ ion-side-menus#authenticated
 		header
 			.header-name Picstreet
 			.header-content
+				.header-content-item.role(ng-grant="['$master']") master
 				.header-content-item.role(ng-grant="['$administrator']") administrator
 				.header-content-item.role(ng-grant="['$manager']") manager
 				.header-content-item.role(ng-grant="['$photographer']") photographer
@@ -15,6 +16,20 @@ ion-side-menus#authenticated
 			menu
 				
 				ion-item(
+					ui-sref="authenticated.documents"
+					ng-grant="['$new']"
+				)
+					.icon: i.custom-icon.custom-icon-business
+					.title Présentation
+
+				ion-item(
+					ui-sref="authenticated.documents"
+					ng-grant="['$new']"
+				)
+					.icon: i.custom-icon.custom-icon-business
+					.title Téléchargez vos documents
+
+				ion-item(
 					ui-sref="authenticated.reviews"
 					ng-grant="['$administrator']"
 				)
@@ -23,6 +38,7 @@ ion-side-menus#authenticated
 
 				ion-item(
 					ui-sref="authenticated.map"
+					ng-grant="['$administrator', '$manager','$photographer']"
 				)
 					.icon: i.custom-icon.custom-icon-business
 					.title Map
@@ -41,6 +57,13 @@ ion-side-menus#authenticated
 					.title Photographers
 
 				ion-item(
+					ui-sref="authenticated.sponsorship"
+					ng-grant="['$photographer']"
+				)
+					.icon: i.custom-icon.custom-icon-business
+					.title Parrainer un photographe
+
+				ion-item(
 					ui-sref="authenticated.customers"
 					ng-grant="['$administrator']"
 				)
@@ -49,10 +72,12 @@ ion-side-menus#authenticated
 
 				ion-item(
 					ui-sref="authenticated.albums"
-					ng-grant="['$administrator', '$photographer']"
+					ng-grant="['$administrator', '$manager', '$photographer']"
 				)
 					.icon: i.custom-icon.custom-icon-business
 					.title Albums
+
+				
 
 				
 

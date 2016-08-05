@@ -1,10 +1,51 @@
 ion-view(title="Customers")#activities
-	.bar.bar-header
-		h1.title Activities
 
-	ion-content.activities-content
-
-		ion-item.activity(
+	ion-content
+		.statistiques
+			.gains {{ win }}€
+		
+		.activity(
 			ng-repeat="activity in activities"
-		) {{ activity.type }} {{ activity.photographerId }} {{ activity.creationDate | date: 'HH:mm:ss'}}
+		) 
 
+			.avatar
+				img(src="img/male.png")
+				
+			.content(ng-if="activity.type == 'dashboard:connect'")
+				
+				span(ng-if="activity.photographerId == $root.me.id")
+					| Vous venez de vous connecter au Dashboard
+
+				span(ng-if="activity.photographerId != $root.me.id")
+					| {{activity.photographer.firstname}}
+					| {{activity.photographer.lastname}}
+					|	vient de se connecter au Dashboard
+
+			.content(ng-if="activity.type == 'send:sponsorship'")
+				
+				span(ng-if="activity.photographerId == $root.me.id")
+					| Vous venez d'envoyer une invitation à
+					| {{activity.newPhotographer.email}}
+
+				span(ng-if="activity.photographerId != $root.me.id")
+					| {{activity.photographer.firstname}}
+					| {{activity.photographer.lastname}}
+					|	vient d'envoyer une invitation à
+					| {{activity.newPhotographer.email}}
+
+			.content(ng-if="activity.type == 'receive:sponsorship'")
+				
+				span(ng-if="activity.photographerId == $root.me.id")
+					| Vous avez reçu une invitation de
+					| {{activity.manager.firstname}}
+					| {{activity.manager.lastname}}
+
+				span(ng-if="activity.photographerId != $root.me.id")
+					| {{activity.photographer.firstname}}
+					| {{activity.photographer.lastname}}
+					|	à reçu une invitation de
+					| {{activity.manager.firstname}}
+					| {{activity.manager.lastname}}
+			
+			.date 
+				span {{ activity.creationDate | date: 'HH:mm:ss'}}

@@ -35,6 +35,7 @@ angular.module "picstreet.album"
 			picture = 
 				name: newfilename
 				albumId: $scope.album.id
+				photographerId: $rootScope.me.id
 			
 			console.log 'PICTURE : ', picture
 				

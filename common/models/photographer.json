@@ -3,16 +3,17 @@
   "base": "User",
   "idInjection": true,
   "options": {
-    "validateUpsert": true
+    "caseSensitiveEmail": false
   },
+  "hidden": [
+    "password"
+  ],
   "properties": {
     "firstname": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "lastname": {
-      "type": "string",
-      "required": true
+      "type": "string"
     }
   },
   "validations": [],
@@ -42,6 +43,21 @@
       "model": "Role",
       "foreignKey": "principalId",
       "through": "RoleMapping"
+    },
+    "photographers": {
+      "type": "hasMany",
+      "model": "Photographer",
+      "foreignKey": "managerId"
+    },
+    "manager": {
+      "type": "belongsTo",
+      "model": "Photographer",
+      "foreignKey": "managerId"
+    },
+    "picturePurchases": {
+      "type": "hasMany",
+      "model": "PicturePurchase",
+      "foreignKey": "photographerId"
     }
   },
   "acls": [
@@ -122,6 +138,34 @@
       "principalType": "ROLE",
       "principalId": "administrator",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY",
+      "property": "email"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$administrator",
+      "permission": "ALLOW",
+      "property": "sponsorship"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$manager",
+      "permission": "ALLOW",
+      "property": "sponsorship"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$photographer",
+      "permission": "ALLOW",
+      "property": "sponsorship"
     }
   ],
   "methods": {}

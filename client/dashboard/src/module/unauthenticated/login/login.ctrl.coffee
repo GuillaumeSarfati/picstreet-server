@@ -9,7 +9,7 @@ angular.module "picstreet.login"
 	$scope.login = (me) ->
 		$connect.login me, (accessToken) ->
 			$connect.remember (me) -> 
-				$state.go 'authenticated.map' if me
+				$state.go 'authenticated.activities' if me
 
 	$scope.signup = ->
 		$state.go 'signup'
