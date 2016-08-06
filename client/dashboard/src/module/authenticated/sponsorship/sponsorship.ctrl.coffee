@@ -1,21 +1,14 @@
 angular.module "picstreet.sponsorship"
 
 .controller "sponsorshipCtrl", ($rootScope, $scope, Photographer) ->
+	$scope.photographer = 
+		firstname:'photographer'
+		email: 'photographer@picstreet.io'
 
-	$scope.sponsorship = (email) ->
-		console.log 'sponsorship : ', email
+	$scope.sponsorship = (photographer) ->
+		console.log 'sponsorship : ', photographer
 
-		Photographer.sponsorship email: email
+		Photographer.sponsorship photographer
 		.$promise
 		.then (success) -> console.log 'success 1: ', success
-		.catch (err) -> console.log 'err : ', err
-
-		Photographer.sponsorship email
-		.$promise
-		.then (success) -> console.log 'success 2: ', success
-		.catch (err) -> console.log 'err : ', err
-
-		Photographer.sponsorship email: email, {}
-		.$promise
-		.then (success) -> console.log 'success 3: ', success
 		.catch (err) -> console.log 'err : ', err

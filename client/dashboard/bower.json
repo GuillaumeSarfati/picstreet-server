@@ -29,7 +29,9 @@
     "angular-dropzone": "~0.1.2",
     "dropzone": "~4.3.0",
     "ng-picstreet": "https://github.com/GuillaumeSarfati/ng-picstreet.git",
-    "angular-bootstrap": "~2.0.1"
+    "angular-bootstrap": "~2.0.1",
+    "textAngular": "~1.5.3",
+    "ng-sortable": "~1.3.6"
   },
   "resolutions": {
     "angular": "1.5.3",

@@ -25,7 +25,8 @@ angular.module 'picstreet.directives', []
 	$$tlb: true,
 	link: ($scope, $element, $attr, ctrl, $transclude) ->
 				
-		$rootScope.$watch 'me', (me)->
+		$rootScope.$watch 'me'
+		, (me) ->
 
 			grantedRoles = $parse($attr.ngGrant)($scope)
 			userRoles = me.roles
@@ -56,6 +57,8 @@ angular.module 'picstreet.directives', []
 						previousElements = null
 				 
 					block = null
+
+		, true
 
 
 

@@ -10,10 +10,12 @@
   ],
   "properties": {
     "firstname": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "lastname": {
-      "type": "string"
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
@@ -166,6 +168,13 @@
       "principalId": "$photographer",
       "permission": "ALLOW",
       "property": "sponsorship"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$new",
+      "permission": "ALLOW",
+      "property": "verify"
     }
   ],
   "methods": {}

@@ -18,15 +18,17 @@ angular.module 'picstreet', [
 	'ngResource'
 	'ngCordova'
 	'ngStorage'
-
+	'ngPicstreet'
+	'ngIOS9UIWebViewPatch'
+	
 	'ionic'
 	'ionic-native-transitions'
 
+	'textAngular'
 	'lbServices'
+	'as.sortable'
 	'ui.bootstrap'
-	'ngPicstreet'
-
-	'ngIOS9UIWebViewPatch'
+	
 
 	'picstreet.translate'
 	'picstreet.directives'

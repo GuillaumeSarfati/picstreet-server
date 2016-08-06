@@ -77,6 +77,13 @@ ion-side-menus#authenticated
 					.icon: i.custom-icon.custom-icon-business
 					.title Albums
 
+				ion-item(
+					ui-sref="authenticated.cgu"
+					ng-grant="['$administrator', '$manager', '$photographer', '$new']"
+				)
+					.icon: i.custom-icon.custom-icon-business
+					.title CGU
+
 				
 
 				

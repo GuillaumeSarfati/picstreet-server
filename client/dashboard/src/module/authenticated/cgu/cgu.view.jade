@@ -1,0 +1,56 @@
+ion-view(title="Legal")#cgu
+	tabs-menu
+
+		tabs-content(
+
+			ng-repeat="tab in tabs"
+			title="tab"
+		)
+			
+
+			.sortable-list(
+				
+				as-sortable="dragControlListeners"
+				ng-model="tab.legals"
+			)
+				.legal(
+					ng-repeat="legal in tab.legals"
+					as-sortable-item
+
+				)
+					
+					.handle.ion-ios-browsers-outline(
+						ng-grant="['$administrator']"
+						as-sortable-item-handle
+					)
+					.title {{legal.title}}
+					
+					.description(
+						ng-bind-html="legal.description"
+					)
+
+					.delete(ng-grant="['$administrator']")
+						a(ng-click="deleteLegal(legal)") delete
+			
+			
+			.legal-editor(ng-grant="['$administrator']")
+				.title
+					input(
+						placeholder="Title"
+						ng-model="newLegal.title"
+					)
+				.description
+					text-angular(
+						placeholder="description"
+						ng-model="newLegal.description"
+					)
+				.action
+					button(ng-click="createLegal(newLegal)") Create
+		
+		
+
+		
+
+
+
+	

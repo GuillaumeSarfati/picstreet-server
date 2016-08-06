@@ -87,7 +87,10 @@ module.exports = (Purchase) ->
 					customer: customer.stripeId
 					card: creditCard.stripeId
 					capture: false
-				, done
+				, (err, charge) ->
+					console.log 'create charge'
+					console.log err, charge
+					done err, charge
 
 			(charge, done) ->
 				charge.purchaseId = instance.id
@@ -96,7 +99,7 @@ module.exports = (Purchase) ->
 				, done
 
 			(charge, done) ->
-
+				console.log 'charge status : ', charge.status
 				if charge.status is 'succeeded'
 					if instance.promotionCodeId
 
@@ -109,20 +112,18 @@ module.exports = (Purchase) ->
 						done null, undefined
 
 			(usedPromotionCode, done) ->
-				PicturePurchase.create instance.pictures.map (picture) ->
+				picturesPurchases = instance.pictures.map (picture) ->
 					photographerId: picture.photographerId
 					customerId: instance.customerId
 					purchaseId: instance.id
 					pictureId: picture.id
 					price: picture.price
-				, done
-
-				# Picture.updateAll
-				# 	id: inq: instance.pictures.map (picture) -> picture.id
-				# , purchase: true
-				# , done
+				PicturePurchase.create picturesPurchases
+				, (err, picturesPurchases) ->
+					done err, picturesPurchases
 
 		], (err, results) ->
+			console.log 'end'
 			return next err if err
 			return instance.save next
 			

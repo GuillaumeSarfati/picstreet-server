@@ -3,14 +3,27 @@ ion-view(title="Invitation")#sponsorship
 	ion-content 
 
 		.sponsorship-container
+			.firstname
+				input(
+					type="text"
+					placeholder="firstname"
+					ng-model="photographer.firstname"
+				)
+			.lastname
+				input(
+					type="text"
+					placeholder="lastname"
+					ng-model="photographer.lastname"
+				)
 			.email
 				input(
 					type="email"
-					ng-model="email"
+					placeholder="email"
+					ng-model="photographer.email"
 				)
 				
 			.action
-				button(ng-click="sponsorship(email)") Invite friend
+				button(ng-click="sponsorship(photographer)") Invite friend
 
 			
 

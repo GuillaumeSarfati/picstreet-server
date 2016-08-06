@@ -7,8 +7,9 @@ module.exports = (Customer) ->
     if ctx.req.body.length
       for customer in ctx.req.body
         unless customer.password
-          customer.password = token.generate 5, '1234567890'
-          console.log 'GENERATE PASSWORD', customer.password
+          customer.password = 'azerty' 
+          #token.generate 5, '1234567890'
+          # console.log 'GENERATE PASSWORD', customer.password
 
     next()
 

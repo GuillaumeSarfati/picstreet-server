@@ -107,5 +107,13 @@
   "PicturePurchase": {
     "dataSource": "mongoDb",
     "public": true
+  },
+  "Legal": {
+    "dataSource": "mongoDb",
+    "public": true
+  },
+  "LegalCategory": {
+    "dataSource": "mongoDb",
+    "public": true
   }
 }

@@ -1,9 +1,12 @@
 angular.module 'picstreet.authenticated', [
 
-	'picstreet.map'
+	'picstreet.documents'
+	'picstreet.cgu'
+	
 	'picstreet.activities'
 
 	'picstreet.payment'
+	'picstreet.map'
 
 	'picstreet.customers'
 	'picstreet.customer'
