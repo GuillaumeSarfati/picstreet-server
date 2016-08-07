@@ -1,0 +1,20 @@
+form.dropzone#dropzone(
+	ng-if="dropzoneConfig"
+	method="post"
+	enctype="multipart/form-data"
+	ng-dropzone
+	dropzone="dropzone"
+	dropzone-config="dropzoneConfig"
+	event-handlers="dropzoneEvents"
+)
+	.dz-message(ng-show="state == 'ready'")
+		button Upload Document
+
+	.dz-message(ng-show="state == 'loading'")
+		ion-spinner(icon="ios")
+
+	.dz-message(ng-show="state == 'success'")
+		i.ion-checkmark-circled
+
+	.dz-message(ng-show="state == 'error'")
+		i.ion-error-circled

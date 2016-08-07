@@ -1,32 +1,30 @@
 {
-  "name": "Device",
+  "name": "Document",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "token": {
+    "type": {
       "type": "string",
       "required": true
     },
-    "targetArn": {
+    "bucket": {
       "type": "string",
       "required": true
     },
-    "info": {
-      "type": "object",
+    "filename": {
+      "type": "string",
       "required": true
+    },
+    "creationDate": {
+      "type": "date",
+      "default": "$now"
     }
   },
   "validations": [],
-  "relations": {
-    "owner": {
-      "type": "belongsTo",
-      "model": "Photographer",
-      "foreignKey": "ownerId"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

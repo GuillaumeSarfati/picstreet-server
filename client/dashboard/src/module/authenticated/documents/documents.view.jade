@@ -1,27 +1,25 @@
 ion-view(title="Invitation")#documents
 	
-	ion-content 
-
-		h1 Documents
+	.documents-checklist
+		
+		h3 DOCUMENTS PERSONNELS REQUIS
+		.document
+			.picto
+				img(src="img/pi.png")
+			.title(ng-class="{'missing': identityDocumentMissing}") MERCI DE PRENDRE EN PHOTO UNE PIÈCE D’IDENTITÉ EN COURS DE VALIDITÉ.
+			.description Sont acceptés : Carte nationale d’identité ou Passeport délivré(e) par un pays de l’Union Européenne, Titre de séjour avec autorisation de travail sur le sol français.
+			.action
+				document-uploader(type="identity")
 
 		.document
-			.name Carte d'identité
-			.description
+			.picto
+				img(src="img/kbis.png")
+			.title(ng-class="{'missing': societyDocumentMissing}") MERCI DE PRENDRE EN PHOTO L’EXTRAIT DE KBIS DE VOTRE SOCIÉTÉ OU VOTRE RELEVÉ INSEE.
+			.description Le document doit mentionner votre nom parmi les gérants de l’entreprise, votre SIREN et votre secteur d’activité. Sa date d’émission doit être la plus récente possible
 			.action
-				button Télécharger votre Carte d'identité
-
-		.document
-			.name Kbis
-			.description
-			.action
-				button Télécharger votre Kbis
-
-		.document
-			.name Photo de profil
-			.description
-			.action
-				button Télécharger votre photo 
+				document-uploader(type="society")
 
 		.finaly
 			.action
+				button(ng-click="reset()") Reset
 				button(ng-click="verify()") Verfier mon compte

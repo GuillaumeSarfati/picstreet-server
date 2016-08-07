@@ -60,6 +60,21 @@
       "type": "hasMany",
       "model": "PicturePurchase",
       "foreignKey": "photographerId"
+    },
+    "identityDocument": {
+      "type": "belongsTo",
+      "model": "Document",
+      "foreignKey": "identityDocumentId"
+    },
+    "societyDocument": {
+      "type": "belongsTo",
+      "model": "Document",
+      "foreignKey": "societyDocumentId"
+    },
+    "documents": {
+      "type": "hasMany",
+      "model": "Document",
+      "foreignKey": "ownerId"
     }
   },
   "acls": [

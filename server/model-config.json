@@ -115,5 +115,9 @@
   "LegalCategory": {
     "dataSource": "mongoDb",
     "public": true
+  },
+  "Document": {
+    "dataSource": "mongoDb",
+    "public": true
   }
 }

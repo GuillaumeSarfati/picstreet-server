@@ -151,7 +151,6 @@ module.exports = (Photographer) ->
 			
 			if err then return callback err
 
-			
 			async.waterfall [
 			
 				(done) ->
