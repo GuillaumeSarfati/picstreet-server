@@ -44,8 +44,9 @@ angular.module 'picstreet.directives'
 				Document.create doc
 				.$promise
 				.then (success) -> 
+					console.log 'me :', $rootScope.me
 					$rootScope.me["#{$scope.type}DocumentId"] = success.id
-					$rootScope.me.$prototype$updateAttributes()
+					$rootScope.me.$save()
 					.then (success) ->
 						$scope.$emit "#{$scope.type}Document:success"
 						console.log 'success update attr: ', success

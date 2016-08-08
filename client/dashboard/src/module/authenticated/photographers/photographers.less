@@ -1,0 +1,96 @@
+#photographers {
+	.informations {
+		* { font-family: "Lucida Grande";}
+		background: #f7f5f5;
+		padding: 20px;
+
+		.icon {}
+		.description {
+			.title {
+				.text-uppercase;
+				color:black;
+			}
+			.text {
+				color: #92929D;
+			}
+		}
+	}
+	.photographers-period {
+		padding: 20px;
+		padding-bottom: 70px;		
+		margin-bottom: 70px;
+		border-bottom: 1px solid #f7f5f5;
+		.title {
+			padding-bottom: 0px;
+			font-size: 16px;
+			font-family: "Open Sans",Arial,sans-serif;
+			font-weight:400;
+
+		}
+		.subtitle {
+			padding-bottom: 20px;
+			// border: 1px solid red;
+			display:flex;
+			.stat {
+				display:flex;
+				padding-right: 10px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				color: #92929D;
+				font-weight: 500;
+				font-family: "Open Sans",Arial,sans-serif;
+				// border: 1px solid green;
+				.name {
+					.text-center;
+					// font-size: 2em;
+				}
+			}
+		}
+	}
+	.photographers {
+		padding: 20px;
+		display:flex;
+		flex-wrap:wrap;
+		justify-content: flex-start;
+		.photographer {
+			transition: all .3s ease;
+			width: 182px;
+			margin-right: 20px;
+			margin-bottom: 20px;
+			
+			.avatar {
+				width:182px;
+				height:182px;
+				border-radius: 4px;
+				background-size:cover;
+				background-position:center;
+				border: 1px solid #e4e4e4;
+				background-color:rgb(244,237,228);
+
+			}
+			.photographer-column {
+				display:inline;
+			}
+			.name {
+				.text-uppercase;
+				display:block;
+			}
+			.infos {
+				width: 100px;
+				color: #92929D;
+				font-weight: 500;
+				font-family: "Open Sans",Arial,sans-serif;
+			}
+			.actions {
+				a {
+					margin-right: 10px;
+				}
+			}
+
+		}
+		.photographer:hover {
+			cursor:pointer;
+			transform: scale(1.1);
+		}
+	}
+}

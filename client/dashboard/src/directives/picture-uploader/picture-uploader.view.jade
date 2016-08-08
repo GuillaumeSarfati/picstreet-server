@@ -1,0 +1,19 @@
+form.dropzone#dropzone(
+	ng-if="dropzoneConfig"
+	method="post"
+	enctype="multipart/form-data"
+	ng-dropzone
+	dropzone="dropzone"
+	dropzone-config="dropzoneConfig"
+	event-handlers="dropzoneEvents"
+)
+	.dz-message
+		div(ng-if="state == 'ready'")
+			button +
+		div(ng-if="state == 'loading'")
+			ion-spinner(icon="ios")
+			.percent {{percent}}%
+
+		div(ng-if="state == 'apply'")
+			ion-spinner(icon="ios")
+			.percent apply watermark

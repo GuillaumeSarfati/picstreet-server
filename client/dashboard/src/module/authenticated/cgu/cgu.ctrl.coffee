@@ -1,6 +1,6 @@
 angular.module "picstreet.cgu"
 
-.controller "cguCtrl", ($rootScope, $scope, LegalCategory, Legal) ->
+.controller "cguCtrl", ($location, $anchorScroll, $rootScope, $scope, LegalCategory, Legal) ->
 	$scope.tabs = []
 	$scope.currentTab= undefined
 	LegalCategory.find 
@@ -15,6 +15,12 @@ angular.module "picstreet.cgu"
 	.$promise
 	.then (category) -> $scope.tabs = category
 	.catch (err) -> console.log 'err : ', err
+	$scope.editLegal = (legal) ->
+
+		$scope.newLegal = legal
+		$location.hash 'editor'
+		$anchorScroll()
+
 	$scope.deleteLegal = (legal) ->
 		if confirm 'Are you sure to delete ?'
 			Legal.destroyById id: legal.id
@@ -23,15 +29,22 @@ angular.module "picstreet.cgu"
 				console.log 'success : ', success
 				$scope.currentTab.legals.splice $scope.currentTab.legals.indexOf(legal), 1
 			.catch (err) -> console.log 'err : ', err
+	
 	$scope.createLegal = (legal) ->
-		Legal.create
-			title: legal.title
-			description: legal.description
-			categoryId: $scope.currentTab.id
-			position: $scope.currentTab.legals.length
+		
+		unless legal.id
+			create = true
+			legal.categoryId = $scope.currentTab.id
+			legal.position = $scope.currentTab.legals.length
+		
+		Legal.upsert legal
+			
 		.$promise
 		.then (legal) -> 
-			$scope.currentTab.legals.push legal
+			if create
+
+				$scope.currentTab.legals.push legal
+
 			$scope.newLegal = {}
 
 		.catch (err) -> console.log 'err : ', err

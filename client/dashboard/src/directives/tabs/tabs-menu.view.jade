@@ -1,11 +1,10 @@
-.container-fluid.container-fixed-lg.main
-	.menu
-		ul.nav.nav-pills
-			li(
-				ng-repeat="tab in tabs track by $index"
-				ng-click="updateCurrentTab(tab)"
-				ng-class="{active: currentTab == tab}"
-			) 
-				a {{ tab.name }}
-	
-	.transclude(ng-transclude)
+.menu
+	ul.nav.nav-pills
+		li(
+			ng-repeat="tab in tabs track by $index"
+			ng-click="updateCurrentTab(tab)"
+			ng-class="{active: currentTab == tab}"
+		) 
+			a {{ tab.name }}
+
+.transclude(ng-transclude)

@@ -15,3 +15,11 @@ angular.module "picstreet.photographers"
 		$scope.photographers = photographers
 	.catch (err) -> console.log err
 
+	$scope.deletePhotographer = (photographer) ->
+		if confirm 'Are you sure to delete this photographer ?'
+			Photographer.destroyById id: photographer.id
+			.$promise
+			.then (success) -> 
+				console.log 'success : ', success
+				$scope.photographers.splice $scope.photographers.indexOf(photographer), 1
+			.catch (err) -> console.log 'err : ', err

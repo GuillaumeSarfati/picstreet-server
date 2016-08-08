@@ -10,11 +10,11 @@ form.dropzone#dropzone(
 	.dz-message(ng-show="state == 'ready'")
 		button Upload Document
 
-	.dz-message(ng-show="state == 'loading'")
+	.dz-message(ng-if="state == 'loading'")
 		ion-spinner(icon="ios")
 
-	.dz-message(ng-show="state == 'success'")
+	.dz-message(ng-if="state == 'success'")
 		i.ion-checkmark-circled
 
-	.dz-message(ng-show="state == 'error'")
+	.dz-message(ng-if="state == 'error'")
 		i.ion-error-circled

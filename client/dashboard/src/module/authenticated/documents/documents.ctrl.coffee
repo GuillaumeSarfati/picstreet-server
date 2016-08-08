@@ -2,6 +2,9 @@ angular.module "picstreet.documents"
 
 .controller "documentsCtrl", ($rootScope, $scope, $state, Photographer) ->
 
+	$scope.$emit 'loading:hide', force:true
+	$scope.$emit 'loading:lock'
+
 	$scope.$on "identityDocument:success", ->
 		$scope.identityDocumentMissing = false
 
@@ -24,12 +27,11 @@ angular.module "picstreet.documents"
 		unless $rootScope.me.societyDocumentId
 			$scope.societyDocumentMissing = true
 
-		unless $scope.identityDocumentMissing and $scope.societyDocumentMissing
+		if $rootScope.me.identityDocumentId and $rootScope.me.societyDocumentId
 			Photographer.verify()
 			.$promise
 			.then (success) -> 
-				$rootScope.me.roles = []
-				$rootScope.me.roles.push name: '$photographer'
+				delete $rootScope.me
 				$state.go 'authenticated.activities'
 			.catch (err) -> console.log 'err : ', err
 

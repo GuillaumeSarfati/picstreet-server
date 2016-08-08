@@ -1,58 +1,62 @@
-ion-view(title="{{album.name}}")
-		
-	ion-content#album
+ion-view(title="{{album.name}}")#album
 
-		
-		.infos
-			input(ng-model="album.name")
-		
-		ion-scroll(
-			direction="x"
-			scrollbar-x="false"
-		)
-			.pictures
-				.picture
-					form.dropzone#dropzone(
-						ng-if="dropzone"
-						method="post"
-						enctype="multipart/form-data"
-						ng-dropzone
-						dropzone="dropzone"
-						dropzone-config="dropzoneConfig"
-						event-handlers="dropzoneEvents"
-					)
-				.picture(
-					ng-repeat="picture in album.pictures track by $index"
+	.informations
+		.icon
+		.description
+			.title title
+			.text hqjhdbq dhjqbs jd qhjs dhq sjd qhjs djj nqdkjn qskdj nj qs ndkjn qskj dnqk sjnd j kqnd
+	
+	.album-pictures-state
+		.title Photos achetées
+		.subtile subtitle
 
+		.pictures
+			.picture(
+				ng-repeat="picture in album.pictures track by $index"
+				ng-if="picture.purchase"
+			)
+				img(
+					ng-src="http://localhost:3000/api/Buckets/ppxpicturesresized/download/resized-{{picture.name}}"
 				)
-					img(
-						ng-src="http://localhost:3000/api/Buckets/ppxpicturesresized/download/resized-{{picture.name}}"
-					)
-					.price(
-						ng-class="{'purchase': picture.purchase }"
-					) {{ picture.price }}€
+
+	.album-pictures-state
+		.title Photos encore en vente
+		.subtile subtitle
+
+		.pictures
+			.picture(
+				ng-repeat="picture in album.pictures track by $index"
+				ng-if="!picture.purchase"
+			)
+				img(
+					ng-src="http://localhost:3000/api/Buckets/ppxpicturesresized/download/resized-{{picture.name}}"
+				)
+			picture-uploader(album="album")
+				//- .price(
+				//- 	ng-class="{'purchase': picture.purchase }"
+				//- ) {{ picture.price }}€
+	
 		
-			
 
 
-		.actions
+	.actions
+		button(
+			ng-click="updateAlbum(album)"
+		) Update Album
+
+		button(
+			ng-click="updateAlbum(album)"
+		) Delete Album
+
+		button(
+			ng-if="album.status == 'waiting'"
+			ng-click="submitToReview(album)"
+		) Submit to Review
+		
+		.admin(ng-grant="['$administrator']")
 			button(
-				ng-click="updateAlbum(album)"
-			) Update Album
-
-			button(
-				ng-click="updateAlbum(album)"
-			) Delete Album
-
-			button(
-				ng-if="album.status == 'waiting'"
-				ng-click="submitToReview(album)"
-			) Submit to Review
-			
-			.admin(ng-grant="['$administrator']")
-				button(
-					ng-if="album.status == 'review'"
-					ng-click="submitToCustomer(album)"
-				) Submit to Customer
+				ng-if="album.status == 'review'"
+				ng-click="submitToCustomer(album)"
+			) Submit to Customer
 
 

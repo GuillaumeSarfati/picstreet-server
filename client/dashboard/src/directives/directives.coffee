@@ -16,6 +16,16 @@ angular.module 'picstreet.directives', []
 				$element[0].style.display = 'block'
 
 
+# .directive 'breadcrumb', ($rootScope, $parse) ->
+
+# 	restrict: 'A'
+
+# 	link: ($scope, $element, $attrs) ->
+
+# 		console.log $parse($attrs.breadcrumb)($scope)
+# 		$rootScope.$on '$stateChangeSuccess', (event, state)->
+# 			switch state.name
+# 				when 'authenticated.activities' then console.log 'Activity'
 .directive 'ngGrant',($rootScope, $parse, $animate, $compile, $grant) ->
 	multiElement: true,
 	transclude: 'element',
@@ -27,36 +37,36 @@ angular.module 'picstreet.directives', []
 				
 		$rootScope.$watch 'me'
 		, (me) ->
+			if me and me.roles
+				grantedRoles = $parse($attr.ngGrant)($scope)
+				userRoles = me.roles
 
-			grantedRoles = $parse($attr.ngGrant)($scope)
-			userRoles = me.roles
+				if $grant.isGranted userRoles, grantedRoles
+					unless childScope
+						$transclude (clone, newScope) ->
+							childScope = newScope;
+							clone[clone.length++] = $compile.$$createComment('end ngGrant', $attr.ngGrant)
 
-			if $grant.isGranted userRoles, grantedRoles
-				unless childScope
-					$transclude (clone, newScope) ->
-						childScope = newScope;
-						clone[clone.length++] = $compile.$$createComment('end ngGrant', $attr.ngGrant)
+							block = clone: clone
+							$animate.enter(clone, $element.parent(), $element)
 
-						block = clone: clone
-						$animate.enter(clone, $element.parent(), $element)
-
-			else 
-				if previousElements
-					previousElements.remove()
-					previousElements = null
-				
-				if childScope
-					childScope.$destroy()
-					childScope = null
-
-				if block
-					previousElements = getBlockNodes block.clone
-					
-					$animate.leave previousElements
-					.then ->
+				else 
+					if previousElements
+						previousElements.remove()
 						previousElements = null
-				 
-					block = null
+					
+					if childScope
+						childScope.$destroy()
+						childScope = null
+
+					if block
+						previousElements = getBlockNodes block.clone
+						
+						$animate.leave previousElements
+						.then ->
+							previousElements = null
+					 
+						block = null
 
 		, true
 

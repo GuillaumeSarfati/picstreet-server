@@ -1,20 +1,53 @@
-ion-view(title="Photographers")#photographer
+ion-view(title="Photographers")
 	
-	ion-content 
-		.name {{ photographer.firstname }}
-
-		.manager(ng-if="photographer.manager")
-			.manager-id {{photographer.managerId}}
-			.manager-name
-				span {{photographer.manager.firstname}} 
-				span {{photographer.manager.lastname}}
-
-		.manager(ng-if="!photographer.manager")
-			.manager-id
-				input(ng-model="photographer.managerId")
-			.action
-				button(ng-click="updatePhotographer(photographer)")
-
-	
-
+	ion-content#photographer 
+		.photographer-primary-infos
+			.avatar
+				img(src="img/male.png")
+			.name 
+				.firstname {{ photographer.firstname }}
+				.lastname {{ photographer.lastname }}
 		
+		.photographer-content
+			tabs-menu
+				
+				tabs-content(
+					title="Activity"
+					ng-grant="['$administrator','$manager']"
+				) 
+				
+				tabs-content(
+					title="Informations"
+					ng-grant="['$administrator','$manager']"
+				)
+				
+				tabs-content(
+					title="Statistiques"
+					ng-grant="['$administrator','$manager']"
+				)
+				
+				tabs-content(
+					title="Albums"
+					ng-grant="['$administrator','$manager']"
+				)
+				
+				tabs-content(
+					title="Payments"
+					ng-grant="['$administrator']"
+				)
+				
+				tabs-content(
+					title="Manager"
+					ng-grant="['$administrator']"
+				)
+				
+				tabs-content(
+					title="Role"
+					ng-grant="['$administrator']"
+				)
+				
+				tabs-content(
+					title="Contact"
+					ng-grant="['$administrator','$manager']"
+				)
+	

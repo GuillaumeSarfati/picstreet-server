@@ -6,6 +6,7 @@ angular.module 'picstreet'
 	templateUrl: 'tabs-menu.view.html'
 
 	controller: ($scope) ->
+		$scope.tabs = [] unless $scope.tabs
 		$scope.$watch 'tabs', (tabs) ->
 			if tabs and tabs.length
 				$scope.$parent.currentTab =  $scope.currentTab = tabs[0]
@@ -26,4 +27,5 @@ angular.module 'picstreet'
 	templateUrl: 'tabs-content.view.html'
 
 	link: ($scope, $element, $attrs, $ctrl) ->
-		$scope.tab = $parse($attrs.title)($scope)
+		$scope.tab = $parse($attrs.title)($scope) or name: $attrs.title
+		$scope.tabs.push $scope.tab

@@ -29,11 +29,12 @@ ion-view(title="Legal")#cgu
 						ng-bind-html="legal.description"
 					)
 
-					.delete(ng-grant="['$administrator']")
+					.actions(ng-grant="['$administrator']")
+						a(ng-click="editLegal(legal)") edit
 						a(ng-click="deleteLegal(legal)") delete
 			
 			
-			.legal-editor(ng-grant="['$administrator']")
+			.legal-editor#editor(ng-grant="['$administrator']")
 				.title
 					input(
 						placeholder="Title"

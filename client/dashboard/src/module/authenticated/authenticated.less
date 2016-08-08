@@ -26,13 +26,54 @@
 			display:flex;
 			justify-content:flex-end;
 			flex-direction:row;
-			.header-content-icon {
+			.header-content-style {
 				border-left: 1px solid #e4e4e4;
-				padding: 20px;
-				font-size: 20px;
 				display:flex;
 				justify-content:center;
 				flex-direction:column;
+				
+			}
+			.header-role {
+				.header-content-style;
+				padding: 20px;
+				.role {
+					.text-uppercase;
+					display:none;
+					&:first-child{
+						display:block;
+					}
+				}
+			}
+			.header-breadcrumb {
+				.header-content-style;
+				padding: 20px;
+				flex:100;
+			}
+			.header-avatar {
+				.header-content-style;
+				.text-center;
+				padding-left:10px;
+				padding-right:10px;
+				img {
+					width: 30px;
+					cursor:pointer;
+				}
+				.dropdown-menu {
+					border: 1px solid 1px solid #e4e4e4;;
+					right: 0;
+					left:inherit;
+					border-radius:0;
+					li {
+						a {
+							cursor:pointer;
+						}
+					}
+				}
+			}
+			.header-content-icon {
+				.header-content-style;
+				padding: 20px;
+				font-size: 20px;
 				transition: all .3s ease;
 				&:hover {
 					cursor:pointer;
@@ -41,15 +82,9 @@
 				}
 			}
 			.header-content-item {
-				border-left: 1px solid #e4e4e4;
+				.header-content-style;
 				padding: 20px;
-				display:flex;
-				justify-content:center;
-				flex-direction:column;
-				&.role {
-					.text-uppercase;
-					flex:100;
-				}
+							
 				&[ng-click] {
 					cursor:pointer;
 					transition: all .3s ease;

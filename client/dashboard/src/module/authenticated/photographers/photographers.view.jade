@@ -1,8 +1,28 @@
-ion-view(title="Photographers")#photographers
+ion-view(title="Photographers")
 
-	ion-content.photographers-content
+	ion-content#photographers
+		.informations
+			.icon
+			.description
+				.title title
+				.text hqjhdbq dhjqbs jd qhjs dhq sjd qhjs djj nqdkjn qskdj nj qs ndkjn qskj dnqk sjnd j kqnd
 
-		section.photographer(
-			ng-repeat="photographer in photographers"
-			ui-sref="authenticated.photographer({id:photographer.id})"
-		) {{ photographer.email }}
+		.photographers
+			.photographer(
+				ng-repeat="photographer in photographers"
+				
+			) 
+				.avatar(
+					ui-sref="authenticated.photographer({id: photographer.id})"
+					style="background-image: url('img/male.png')")
+
+				.photographer-column.name {{ photographer.firstname }} {{ photographer.lastname }}
+				
+				.photographer-column
+					.actions
+						a(ui-sref="authenticated.photographer({id: photographer.id})") voir
+						a(
+							ng-click="deletePhotographer(photographer)"
+							ng-grant="['$master']"
+						) supprimer
+				

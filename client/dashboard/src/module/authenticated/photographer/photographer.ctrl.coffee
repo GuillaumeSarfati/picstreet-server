@@ -9,3 +9,4 @@ angular.module "picstreet.photographer"
 		photographer.$prototype$updateAttributes()
 		.then (success) -> console.log 'success : ', success
 		.catch (err) -> console.log 'err : ', err
+

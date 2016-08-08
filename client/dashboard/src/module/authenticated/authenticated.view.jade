@@ -5,13 +5,30 @@ ion-side-menus#authenticated
 		header
 			.header-name Picstreet
 			.header-content
-				.header-content-item.role(ng-grant="['$master']") master
-				.header-content-item.role(ng-grant="['$administrator']") administrator
-				.header-content-item.role(ng-grant="['$manager']") manager
-				.header-content-item.role(ng-grant="['$photographer']") photographer
+
+				.header-role
+					.role(ng-grant="['$master']") master
+					.role(ng-grant="['$administrator']") administrator
+					.role(ng-grant="['$manager']") manager
+					.role(ng-grant="['$photographer']") photographer
+				.header-breadcrumb
+					.breadcrumb-item
+						i.ion-ios-arrow-right
+
 				.header-content-icon.ion-ios-bell-outline
 				.header-content-icon.ion-ios-gear-outline
-				.header-content-item(ng-click="logout()") logout
+				.header-avatar(uib-dropdown)
+					
+					img(
+						src="img/male.png"
+						uib-dropdown-toggle
+					)
+					.dropdown-menu(uib-dropdown-menu)
+
+						li: a(ng-click="profil()") Your profile
+						li: a(ng-click="help()") Help
+						li: a(ng-click="logout()") Sign out
+						
 		main
 			menu
 				
@@ -58,7 +75,7 @@ ion-side-menus#authenticated
 
 				ion-item(
 					ui-sref="authenticated.sponsorship"
-					ng-grant="['$photographer']"
+					ng-grant="['$administrator', '$photographer']"
 				)
 					.icon: i.custom-icon.custom-icon-business
 					.title Parrainer un photographe
