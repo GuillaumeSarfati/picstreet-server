@@ -2,8 +2,8 @@
 	ul.nav.nav-pills
 		li(
 			ng-repeat="tab in tabs track by $index"
-			ng-click="updateCurrentTab(tab)"
-			ng-class="{active: currentTab == tab}"
+			ng-click="updateCurrentTab($index)"
+			ng-class="{active: currentTab == $index}"
 		) 
 			a {{ tab.name }}
 

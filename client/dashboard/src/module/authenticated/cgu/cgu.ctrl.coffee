@@ -1,8 +1,9 @@
 angular.module "picstreet.cgu"
 
 .controller "cguCtrl", ($location, $anchorScroll, $rootScope, $scope, LegalCategory, Legal) ->
-	$scope.tabs = []
-	$scope.currentTab= undefined
+
+	$scope.currentTab = undefined
+
 	LegalCategory.find 
 		filter:
 			include: [
@@ -13,7 +14,7 @@ angular.module "picstreet.cgu"
 				}
 			]
 	.$promise
-	.then (category) -> $scope.tabs = category
+	.then (categories) -> $scope.categories = categories
 	.catch (err) -> console.log 'err : ', err
 	$scope.editLegal = (legal) ->
 
@@ -27,15 +28,15 @@ angular.module "picstreet.cgu"
 			.$promise
 			.then (success) -> 
 				console.log 'success : ', success
-				$scope.currentTab.legals.splice $scope.currentTab.legals.indexOf(legal), 1
+				$scope.categories[$scope.currentTab].legals.splice $scope.categories[$scope.currentTab].legals.indexOf(legal), 1
 			.catch (err) -> console.log 'err : ', err
 	
 	$scope.createLegal = (legal) ->
 		
 		unless legal.id
 			create = true
-			legal.categoryId = $scope.currentTab.id
-			legal.position = $scope.currentTab.legals.length
+			legal.categoryId = $scope.categories[$scope.currentTab].id
+			legal.position = $scope.categories[$scope.currentTab].legals.length
 		
 		Legal.upsert legal
 			
@@ -43,7 +44,7 @@ angular.module "picstreet.cgu"
 		.then (legal) -> 
 			if create
 
-				$scope.currentTab.legals.push legal
+				$scope.categories[$scope.currentTab].legals.push legal
 
 			$scope.newLegal = {}
 

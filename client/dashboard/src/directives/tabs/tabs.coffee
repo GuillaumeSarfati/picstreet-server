@@ -8,12 +8,10 @@ angular.module 'picstreet'
 	controller: ($scope) ->
 		$scope.tabs = [] unless $scope.tabs
 		$scope.$watch 'tabs', (tabs) ->
-			if tabs and tabs.length
-				$scope.$parent.currentTab =  $scope.currentTab = tabs[0]
-
+			$scope.currentTab = 0
 		
-		$scope.updateCurrentTab = (tab) ->
-			$scope.$parent.currentTab = $scope.currentTab = tab
+		$scope.updateCurrentTab = (index) ->
+			$scope.$parent.currentTab = $scope.currentTab = index
 		
 		return 
 

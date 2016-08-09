@@ -3,18 +3,18 @@ ion-view(title="Legal")#cgu
 
 		tabs-content(
 
-			ng-repeat="tab in tabs"
-			title="tab"
+			ng-repeat="category in categories"
+			title="category"
 		)
 			
 
 			.sortable-list(
 				
 				as-sortable="dragControlListeners"
-				ng-model="tab.legals"
+				ng-model="category.legals"
 			)
 				.legal(
-					ng-repeat="legal in tab.legals"
+					ng-repeat="legal in category.legals"
 					as-sortable-item
 
 				)
